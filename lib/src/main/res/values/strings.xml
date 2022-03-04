@@ -1,0 +1,7 @@
+<resources>
+    //error
+    <string name="error_no_internet">请检查您的网络</string>
+    <string name="error_un_know">未知错误</string>
+    <string name="error_empty">404</string>
+    
+</resources>

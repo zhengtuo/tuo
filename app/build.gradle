@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+}
+apply from: rootProject.file('libbase.gradle')
+
+android {
+
+    defaultConfig {
+        //ARouter
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        //noinspection DataBindingWithoutKapt
+        dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //arouter
+    kapt "com.alibaba:arouter-compiler:$versions.arouter"
+    //room
+    kapt "androidx.room:room-compiler:$versions.room"
+    //hilt
+    api "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    //api "com.github.skydoves:balloon:$versions.balloon"
+
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
+
+    api project(":lib")
+
+    //PhotoView 图片浏览缩放控件
+    api 'com.bm.photoview:library:1.4.1'
+    //PermissionX 郭霖写的权限库
+    api 'com.guolindev.permissionx:permissionx:1.6.1'
+
+}

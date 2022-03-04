@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="sv"
+            type="android.view.View" />
+
+        <import type="com.zheng.lib.utils.LibUtils" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.application.view.SplashActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hideLine="@{true}"
+            app:title="@{title}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.什么是activity results api"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/ContentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Activity Results API 是 Google官方推荐的Activity、Fragment获取返回结果的方式。相当于原startActivityForResult 和onActivityResult方法。"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/TitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.引入原因"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/ContentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="①随着应用的扩展，onActivityResult回调方法各种嵌套、耦合严重、难以维护。\n②在google最新的activity-ktx beta版本中已经废弃了原onActivityResult方法，推荐使用Activity Results API来处理页面数据的处理。\n③通过新的 Activity Result API，我们可以单独的类中处理结果回调，真正做到单一职责。"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/TitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.使用步骤"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/ContentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:html_text="@{@string/result_api_1}" />
+
+                <TextView
+                    style="@style/ContentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:html_text="@{@string/result_api_2}" />
+
+                <com.zheng.tuo.utils.IconFontView
+                    android:id="@+id/ic_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/eada"
+                    android:textSize="@dimen/sp_40" />
+
+                <TextView
+                    android:id="@+id/tv_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="在两个Activity之间交换数据"
+                    tools:ignore="HardcodedText" />
+
+                <com.bm.library.PhotoView
+                    android:id="@+id/pv_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    app:photoview_enable="@{true}"
+                    app:url='@{LibUtils.getImageForMedia("result_api_1.png")}' />
+
+                <com.zheng.tuo.utils.IconFontView
+                    android:id="@+id/ic_icon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/ead4"
+                    android:textSize="@dimen/sp_40" />
+
+                <TextView
+                    android:id="@+id/tv_permissions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="请求运行时权限"
+                    tools:ignore="HardcodedText" />
+
+                <com.bm.library.PhotoView
+                    android:id="@+id/pv_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    app:photoview_enable="@{true}"
+                    app:url='@{LibUtils.getImageForMedia("result_api_2.png")}' />
+
+                <com.zheng.tuo.utils.IconFontView
+                    android:id="@+id/ic_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/eada"
+                    android:textSize="@dimen/sp_40" />
+
+                <TextView
+                    android:id="@+id/tv_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="内置Contract"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:url='@{LibUtils.getImageForMedia("result_api_3.png")}'
+                    tools:ignore="ContentDescription" />
+
+                <com.zheng.tuo.utils.IconFontView
+                    android:id="@+id/ic_icon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/ead4"
+                    android:textSize="@dimen/sp_40" />
+
+                <TextView
+                    android:id="@+id/tv_customize_contract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="自定义Contract"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:url='@{LibUtils.getImageForMedia("result_api_4.png")}'
+                    tools:ignore="ContentDescription" />
+
+                <com.bm.library.PhotoView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    app:photoview_enable="@{true}"
+                    app:url='@{LibUtils.getImageForMedia("result_api_5.png")}' />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

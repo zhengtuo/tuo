@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zheng.tuo.ui.application.viewmodel.LoginVM" />
+
+        <import type="com.zheng.tuo.tool.drawabledsl.DrawableDslManager" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_3081e4"
+        app:statusBarDarkFont="@{false}"
+        tools:context=".ui.application.view.LoginActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:src="@mipmap/icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <LinearLayout
+            android:id="@+id/ll_phone_number"
+            style="@style/LoginLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line2"
+            app:set_drawable="@{DrawableDslManager.login_edit_bg}">
+
+            <com.zheng.tuo.utils.IconFontView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:text="@string/icon_phone"
+                android:textColor="@color/color_d"
+                android:textSize="@dimen/sp_14" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:background="@null"
+                android:hint="请输入手机号码"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingStart="@dimen/dp_9"
+                android:paddingEnd="@dimen/dp_0"
+                android:textColor="@color/color_d"
+                android:textColorHint="@color/color_d"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_code"
+            style="@style/LoginLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_phone_number"
+            app:set_drawable="@{DrawableDslManager.login_edit_bg}">
+
+            <com.zheng.tuo.utils.IconFontView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:text="@string/icon_code"
+                android:textColor="@color/color_d"
+                android:textSize="@dimen/sp_14" />
+
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingStart="@dimen/dp_9"
+                android:paddingEnd="@dimen/dp_0"
+                android:textColor="@color/color_d"
+                android:textColorHint="@color/color_d"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_25"
+                android:enabled="@{vm.smsEnable}"
+                android:text="@{vm.time== 0 ? @string/obtain_sms_code :@string/obtain_sms_again(vm.time)  }"
+                android:textColor="@color/color_d"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_login"
+            style="@style/MarginLeftAndRight25"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_16"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@color/color_3081e4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_code"
+            app:set_drawable="@{DrawableDslManager.login_btn}" />
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@={vm.checked}"
+                android:paddingStart="@dimen/dp_6"
+                android:paddingEnd="@dimen/dp_0"
+                android:text="@string/read_and_agree"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drelovey_user_and_agreement"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
