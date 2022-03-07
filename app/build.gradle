@@ -60,5 +60,6 @@ dependencies {
     api 'com.bm.photoview:library:1.4.1'
     //PermissionX 郭霖写的权限库
     api 'com.guolindev.permissionx:permissionx:1.6.1'
+    api project(path: ':flutter')
 
 }

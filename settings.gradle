@@ -1,3 +1,12 @@
 include ':app'
 rootProject.name = "tuo"
 include ':lib'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        '../flutter_tuo/.android/include_flutter.groovy'
+))
+
+include ':flutter_tuo'
+project(':flutter_tuo').projectDir = new File('../flutter_tuo')
+
