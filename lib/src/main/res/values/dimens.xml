@@ -6,6 +6,7 @@
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_2_5">2.5dp</dimen>
     <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_7">7dp</dimen>
@@ -72,6 +73,7 @@
     <dimen name="dp_150">150dp</dimen>
     <dimen name="dp_200">200dp</dimen>
 
+    <dimen name="sp_9">10sp</dimen>
     <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_11">11sp</dimen>
     <dimen name="sp_12">12sp</dimen>

@@ -14,7 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = RouterPath.PATH_MAIN)
 class MainActivity : BaseActivity<ActivityMainBinding, MainVM>(R.layout.activity_main) {
     override fun initialization() {
+        //
+        binding.rgTab.setOnCheckedChangeListener { group, checkedId ->
 
+        }
     }
 
 }

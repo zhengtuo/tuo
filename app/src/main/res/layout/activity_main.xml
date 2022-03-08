@@ -5,7 +5,7 @@
 
     <data>
 
-
+        <import type="com.zheng.tuo.tool.drawabledsl.DrawableDslManager" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,35 +13,54 @@
         android:layout_height="match_parent"
         tools:context=".ui.application.view.MainActivity">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintBottom_toTopOf="@+id/rg_tab"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <RadioGroup
+            android:id="@+id/rg_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <RadioButton
+                android:id="@+id/rb_home"
+                style="@style/main_tab"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+                android:drawableTop="@{DrawableDslManager.tab_home}"
+                android:text="首页" />
 
             <RadioButton
+                android:id="@+id/rb_course"
+                style="@style/main_tab"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+                android:drawableTop="@{DrawableDslManager.tab_course}"
+                android:text="课程" />
 
             <RadioButton
+                android:id="@+id/rb_live"
+                style="@style/main_tab"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+                android:drawableTop="@{DrawableDslManager.tab_live}"
+                android:text="直播" />
 
             <RadioButton
+                android:id="@+id/rb_study"
+                style="@style/main_tab"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+                android:drawableTop="@{DrawableDslManager.tab_study}"
+                android:text="学习圈" />
+
+            <RadioButton
+                android:id="@+id/rb_my"
+                style="@style/main_tab"
+                android:layout_width="0dp"
+                android:drawableTop="@{DrawableDslManager.tab_my}"
+                android:text="我的" />
 
         </RadioGroup>
 

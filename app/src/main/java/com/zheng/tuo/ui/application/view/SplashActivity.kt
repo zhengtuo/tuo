@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.lib.utils.SharedPreferencesUtils
 import com.zheng.tuo.R
 import com.zheng.tuo.arouter.Router
 import com.zheng.tuo.arouter.RouterPath
@@ -23,12 +24,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashVM>(R.layout.ac
         override fun onActivityResult(granted: Boolean) {
             if (granted) {
                 // allow the permission
-                Router.getInstance().build(RouterPath.PATH_LOGIN).navigation()
+                if (SharedPreferencesUtils.getBoolean("privacy_policy_agree", false)) {
+                    Router.getInstance().build(RouterPath.PATH_MAIN).navigation()
+                } else {
+                    Router.getInstance().build(RouterPath.PATH_LOGIN).navigation()
+                }
+                finish()
             } else {
                 //deny the permission
 
             }
-            finish()
+
         }
 
     })
