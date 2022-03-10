@@ -1,4 +1,4 @@
-package com.zheng.tuo.ui.application.viewmodel
+package com.zheng.tuo.ui.application.mt.system.viewmodel
 
 import android.widget.Toast
 import androidx.databinding.ObservableField
@@ -7,7 +7,7 @@ import com.zheng.lib.base.viewmodel.BaseViewModel
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.utils.LibUtils
 import com.zheng.lib.utils.launch
-import com.zheng.tuo.ui.application.model.LoginModel
+import com.zheng.tuo.ui.application.mt.system.model.LoginModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

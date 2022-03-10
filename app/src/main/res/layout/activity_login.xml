@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.zheng.tuo.ui.application.viewmodel.LoginVM" />
+            type="com.zheng.tuo.ui.application.mt.system.viewmodel.LoginVM" />
 
         <import type="com.zheng.tuo.tool.drawabledsl.DrawableDslManager" />
     </data>
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="@color/color_3081e4"
         app:statusBarDarkFont="@{false}"
-        tools:context=".ui.application.view.LoginActivity">
+        tools:context=".ui.application.mt.system.view.LoginActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line"

@@ -1,4 +1,4 @@
-package com.zheng.tuo.ui.application.viewmodel
+package com.zheng.tuo.ui.application.mt.system.viewmodel
 
 import com.zheng.lib.base.model.EmptyModel
 import com.zheng.lib.base.viewmodel.BaseViewModel

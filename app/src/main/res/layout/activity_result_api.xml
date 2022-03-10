@@ -20,7 +20,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.application.view.SplashActivity">
+        tools:context=".ui.application.mt.system.view.SplashActivity">
 
         <include
             android:id="@+id/toolbar"

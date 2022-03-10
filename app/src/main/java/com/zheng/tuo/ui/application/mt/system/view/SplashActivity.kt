@@ -1,8 +1,7 @@
-package com.zheng.tuo.ui.application.view
+package com.zheng.tuo.ui.application.mt.system.view
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -12,7 +11,7 @@ import com.zheng.tuo.R
 import com.zheng.tuo.arouter.Router
 import com.zheng.tuo.arouter.RouterPath
 import com.zheng.tuo.databinding.ActivitySplashBinding
-import com.zheng.tuo.ui.application.viewmodel.SplashVM
+import com.zheng.tuo.ui.application.mt.system.viewmodel.SplashVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")

@@ -1,4 +1,4 @@
-package com.zheng.tuo.ui.application.viewmodel
+package com.zheng.tuo.ui.application.mt.main.viewmodel
 
 import androidx.databinding.ObservableField
 import com.zheng.lib.base.model.EmptyModel

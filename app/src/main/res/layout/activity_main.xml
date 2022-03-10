@@ -11,9 +11,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.application.view.MainActivity">
+        tools:context=".ui.application.mt.main.view.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             app:layout_constraintBottom_toTopOf="@+id/rg_tab"

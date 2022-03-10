@@ -1,4 +1,4 @@
-package com.zheng.tuo.ui.application.model
+package com.zheng.tuo.ui.application.mt.system.model
 
 import com.zheng.lib.data.model.Resource
 import com.zheng.tuo.data.DataRepository

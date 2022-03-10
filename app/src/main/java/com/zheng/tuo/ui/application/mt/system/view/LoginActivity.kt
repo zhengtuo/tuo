@@ -1,4 +1,4 @@
-package com.zheng.tuo.ui.application.view
+package com.zheng.tuo.ui.application.mt.system.view
 
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -14,7 +14,7 @@ import com.zheng.tuo.data.model.KeyBean
 import com.zheng.tuo.data.model.LoginBean
 import com.zheng.tuo.databinding.ActivityLoginBinding
 import com.zheng.tuo.tool.drawabledsl.DrawableDslManager
-import com.zheng.tuo.ui.application.viewmodel.LoginVM
+import com.zheng.tuo.ui.application.mt.system.viewmodel.LoginVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

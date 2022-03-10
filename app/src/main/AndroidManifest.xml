@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".ui.application.view.SplashActivity"
+            android:name="com.zheng.tuo.ui.application.mt.system.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,12 +29,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.application.view.MainActivity" />
+        <activity android:name="com.zheng.tuo.ui.application.mt.main.view.MainActivity" />
 
         <!--learn-->
         <!--        <activity android:name=".ui.learn.view.ResultApiActivity" />-->
         <activity android:name=".ui.learn.view.GetResultActivity" />
-        <activity android:name=".ui.application.view.LoginActivity" />
+        <activity android:name="com.zheng.tuo.ui.application.mt.system.view.LoginActivity" />
         <!--        <activity android:name=".ui.learn.view.StorageActivity" />-->
 
     </application>
