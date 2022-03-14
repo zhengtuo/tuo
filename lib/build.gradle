@@ -6,8 +6,6 @@ plugins {
 apply from: rootProject.file('libbase.gradle')
 
 android {
-
-
     defaultConfig {
         //ARouter
         kapt {

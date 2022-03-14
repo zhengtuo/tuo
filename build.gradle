@@ -4,7 +4,7 @@ buildscript {
         kotlin_plugin = "7.1.2"
         kotlin_version = "1.6.10"
     }
-    apply from: "$rootDir/dependencies.gradle"
+    apply from: "$rootDir/config.gradle"
     repositories {
         google()
         //noinspection JcenterRepositoryObsolete

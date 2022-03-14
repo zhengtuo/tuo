@@ -1,0 +1,58 @@
+plugins {
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+}
+
+if (versions.is_application) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+apply from: rootProject.file('libbase.gradle')
+
+android {
+
+    defaultConfig {
+        if (versions.is_appliscation) {
+            applicationId "com.mingtao.professionedu"
+        }
+        //ARouter
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildFeatures {
+        //noinspection DataBindingWithoutKapt
+        dataBinding true
+    }
+
+    sourceSets {
+        main {
+            if (versions.is_application) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDirs 'src/main/module'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(":comon")
+    //arouter
+    kapt "com.alibaba:arouter-compiler:$versions.arouter"
+    //room
+    kapt "androidx.room:room-compiler:$versions.room"
+    //hilt
+    api "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
+}

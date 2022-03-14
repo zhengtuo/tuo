@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: rootProject.file('libbase.gradle')
+android {
+
+}
+
+dependencies {
+    api project(":lib")
+
+    //PermissionX 郭霖写的权限库
+    api 'com.guolindev.permissionx:permissionx:1.6.1'
+}

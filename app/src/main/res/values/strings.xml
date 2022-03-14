@@ -1,20 +1,10 @@
 <resources>
     <string name="app_name">tuo</string>
-    //iconfont
-    <string name="e766">&#xe766;</string>
-    <string name="eada">&#xeada;</string>
-    <string name="ead4">&#xead4;</string>
-    <string name="icon_phone">&#xe8c6;</string>
-    <string name="icon_code">&#xe624;</string>
-
-    //ResultApiActivity
-    <string name="result_api_1"><![CDATA[ "<font color='#D35E4E'>ActivityResultContract</font>:协议,它定义了如何传递数据和如何处理返回的数据" ]]></string>
-    <string name="result_api_2"><![CDATA[ "<font color='#D35E4E'>ActivityResultLauncher</font>:启动器,调用ActivityResultLauncher的launch方法来启动页面跳转,作用相当于原来的startActivity()。" ]]></string>
 
     //LoginActivity
     <string name="login">登录</string>
     <string name="obtain_sms_code">获取验证码</string>
     <string name="obtain_sms_again">重新获取(%sS)</string>
-    <string name="read_and_agree">我已阅读并同意</string>
+
     <string name="drelovey_user_and_agreement">《“Drelovey”用户和隐私协议》</string>
 </resources>

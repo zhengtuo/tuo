@@ -7,7 +7,6 @@ import com.zheng.lib.base.delegate.ApplicationDelegate
 import com.zheng.lib.data.model.NetConfig
 import com.zheng.lib.utils.LibUtils
 import com.zheng.tuo.BuildConfig
-import com.zheng.tuo.data.remote.interceptor.HeadInterceptor
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -36,7 +35,7 @@ open class TuoApp : Application() {
      */
     private fun initApp() {
         LibUtils.context = this
-        LibUtils.setNetConstants(NetConfig().setBaseUrl("http://php.mingtaoedu.com/mt/public/index.php/").setInterceptor(HeadInterceptor()))
+        //LibUtils.setNetConstants(NetConfig().setBaseUrl("http://php.mingtaoedu.com/mt/public/index.php/").setInterceptor(HeadInterceptor()))
 
         initARouter()
     }

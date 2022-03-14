@@ -1,0 +1,25 @@
+<resources>
+
+    <style name="MarginLeftAndRight30">
+        <item name="android:layout_marginStart">@dimen/dp_30</item>
+        <item name="android:layout_marginEnd">@dimen/dp_30</item>
+    </style>
+
+<!--    <style name="LoginLinearLayout" parent="MarginLeftAndRight25">-->
+<!--        <item name="android:focusable">true</item>-->
+<!--        <item name="android:focusableInTouchMode">true</item>-->
+<!--        <item name="android:orientation">horizontal</item>-->
+<!--    </style>-->
+
+    <style name="main_tab">
+        <item name="android:textSize">@dimen/sp_9</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:textColor">@color/color_main_tab</item>
+        <item name="android:paddingTop">@dimen/dp_7</item>
+        <item name="android:paddingBottom">@dimen/dp_4</item>
+    </style>
+
+</resources>

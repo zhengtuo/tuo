@@ -11,9 +11,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/comon" />
             <option value="$PROJECT_DIR$/flutter_tuo" />
             <option value="$PROJECT_DIR$/flutter_tuo/.android/Flutter" />
+            <option value="$PROJECT_DIR$/learn_android" />
             <option value="$PROJECT_DIR$/lib" />
+            <option value="$PROJECT_DIR$/mingtao_classroom_professional" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

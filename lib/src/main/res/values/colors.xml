@@ -8,4 +8,6 @@
     <color name="transparent">#00000000</color>
     <color name="color_c">#CCCCCC</color>
     <color name="color_a">#AAAAAA</color>
+    <color name="color_b">#BBBBBB</color>
+    <color name="color_e">#EEEEEE</color>
 </resources>

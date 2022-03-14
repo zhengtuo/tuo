@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.mingtao.professionedu.data.constants.drawabledsl.DrawableDslManager" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintBottom_toTopOf="@+id/rg_tab"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_home"
+                style="@style/main_tab"
+                android:layout_width="0dp"
+                android:drawableTop="@{DrawableDslManager.tab_home}"
+                android:text="首页" />
+
+            <RadioButton
+                android:id="@+id/rb_study"
+                style="@style/main_tab"
+                android:layout_width="0dp"
+                android:drawableTop="@{DrawableDslManager.tab_study}"
+                android:text="学习" />
+
+            <RadioButton
+                android:id="@+id/rb_find"
+                style="@style/main_tab"
+                android:layout_width="0dp"
+                android:drawableTop="@{DrawableDslManager.tab_find}"
+                android:text="发现" />
+
+            <RadioButton
+                android:id="@+id/rb_my"
+                style="@style/main_tab"
+                android:layout_width="0dp"
+                android:drawableTop="@{DrawableDslManager.tab_my}"
+                android:text="个人" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
