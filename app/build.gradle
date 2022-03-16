@@ -6,6 +6,8 @@ plugins {
 apply from: rootProject.file('libbase.gradle')
 
 android {
+    //用于隔离不同model的资源文件
+    resourcePrefix "mtp_"
 
     defaultConfig {
         //ARouter

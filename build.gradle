@@ -21,11 +21,11 @@ buildscript {
         //hilt
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
 
-        classpath 'com.dipien:bye-bye-jetifier:1.2.1'
+        //classpath 'com.dipien:bye-bye-jetifier:1.2.1'
     }
 }
 
-apply plugin: "com.dipien.byebyejetifier"
+//apply plugin: "com.dipien.byebyejetifier"
 
 allprojects {
     repositories {
