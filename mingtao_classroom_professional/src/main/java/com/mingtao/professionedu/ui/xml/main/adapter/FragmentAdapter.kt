@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.main.adapter
+package com.mingtao.professionedu.ui.xml.main.adapter
 
 import android.util.SparseArray
 import androidx.fragment.app.Fragment

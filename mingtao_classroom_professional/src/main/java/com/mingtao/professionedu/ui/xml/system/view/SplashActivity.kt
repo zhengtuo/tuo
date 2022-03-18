@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.system.view
+package com.mingtao.professionedu.ui.xml.system.view
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -11,7 +11,7 @@ import com.zheng.lib.base.activity.BaseActivity
 import com.zheng.lib.utils.SharedPreferencesUtils
 import com.zheng.tuo.arouter.Router
 import com.zheng.tuo.arouter.RouterPath
-import com.mingtao.professionedu.ui.system.viewmodel.SplashVM
+import com.mingtao.professionedu.ui.xml.system.viewmodel.SplashVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")

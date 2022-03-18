@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
-            android:name=".ui.main.view.MTPMainActivity"
+            android:name=".ui.compose.main.view.MTPCMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

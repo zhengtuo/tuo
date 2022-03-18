@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.system.viewmodel
+package com.mingtao.professionedu.ui.xml.system.viewmodel
 
 import com.zheng.lib.base.model.EmptyModel
 import com.zheng.lib.base.viewmodel.BaseViewModel

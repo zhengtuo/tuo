@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.mingtao.professionedu.ui.system.viewmodel.MTPLoginVM" />
+            type="com.mingtao.professionedu.ui.xml.system.viewmodel.MTPLoginVM" />
 
         <import type="com.mingtao.professionedu.data.constants.drawabledsl.DrawableDslManager" />
     </data>

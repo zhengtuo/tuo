@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.system.model
+package com.mingtao.professionedu.ui.xml.system.model
 
 import com.mingtao.professionedu.data.DataRepository
 import com.zheng.lib.data.model.Resource

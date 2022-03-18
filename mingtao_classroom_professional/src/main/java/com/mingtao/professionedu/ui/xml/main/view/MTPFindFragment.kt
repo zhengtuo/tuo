@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.main.view
+package com.mingtao.professionedu.ui.xml.main.view
 
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.FragmentMtpHomeBinding

@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.main.viewmodel
+package com.mingtao.professionedu.ui.xml.main.viewmodel
 
 import androidx.databinding.ObservableField
 import com.zheng.lib.base.model.EmptyModel

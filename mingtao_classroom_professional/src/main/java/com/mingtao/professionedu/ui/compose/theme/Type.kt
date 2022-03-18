@@ -1,4 +1,4 @@
-package com.zheng.composetest.ui.theme
+package com.mingtao.professionedu.ui.compose.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

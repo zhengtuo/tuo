@@ -1,4 +1,4 @@
-package com.mingtao.professionedu.ui.system.viewmodel
+package com.mingtao.professionedu.ui.xml.system.viewmodel
 
 import android.widget.Toast
 import androidx.databinding.ObservableField
@@ -7,7 +7,7 @@ import com.zheng.lib.base.viewmodel.BaseViewModel
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.utils.LibUtils
 import com.zheng.lib.utils.launch
-import com.mingtao.professionedu.ui.system.model.LoginModel
+import com.mingtao.professionedu.ui.xml.system.model.LoginModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

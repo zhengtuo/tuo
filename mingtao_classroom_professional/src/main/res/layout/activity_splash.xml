@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.mingtao.professionedu.ui.system.viewmodel.SplashVM" />
+            type="com.mingtao.professionedu.ui.xml.system.viewmodel.SplashVM" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mingtao.professionedu.ui.system.view.SplashActivity">
+        tools:context=".ui.xml.system.view.SplashActivity">
 
         <ImageView
             android:layout_width="0dp"
