@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivitySplashBinding
-import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.base.activity.BaseActivity
 import com.zheng.lib.utils.SharedPreferencesUtils
 import com.zheng.tuo.arouter.Router
 import com.zheng.tuo.arouter.RouterPath

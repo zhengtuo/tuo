@@ -16,26 +16,15 @@ import retrofit2.http.*
 interface ApiService {
 
     /**
-     * 获取验证信息(正确才能发送验证码)
-     */
-    @POST("api/user/key")
-    suspend fun getKey(): ApiResponse<BaseEntity<KeyBean>>
-
-
-    /**
      * 发送短信验证码
      */
-    @POST("api/user/Ajax_sendSMS")
+    @POST("smsLog/sendSms")
     @FormUrlEncoded
-    suspend fun sendSms(
-        @Field("mobile") mobile: String, @Field("type") type: Int, @Field("code") code: String
-    ): ApiResponse<BaseEntity<Any>>
+    suspend fun sendSms(@Field("phone") phone: String, @Field("codeType") codeType: Int): ApiResponse<BaseEntity<Any>>
 
     @POST("api/Index/login_sms")
     @FormUrlEncoded
-    suspend fun codeLogin(
-        @Field("user_name") user_name: String, @Field("sms_code") sms_code: String
-    ): ApiResponse<BaseEntity<LoginBean>>
+    suspend fun codeLogin(@Field("user_name") user_name: String, @Field("sms_code") sms_code: String): ApiResponse<BaseEntity<LoginBean>>
 
 
 }

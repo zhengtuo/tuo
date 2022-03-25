@@ -1,28 +1,22 @@
-package com.zheng.lib.base.activity
+package com.zheng.base.activity
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Message
-import androidx.annotation.LayoutRes
-import androidx.databinding.ViewDataBinding
+import androidx.activity.ComponentActivity
 import androidx.lifecycle.Observer
 import com.zheng.lib.base.viewmodel.BaseViewModel
-import com.skydoves.bindables.BindingActivity
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.tool.gloading.Gloading
 import com.zheng.lib.utils.observe
-import com.zheng.lib.utils.viewModelsByVM
 
 
-abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor(
-    @LayoutRes private val contentLayoutId: Int,
-) : BindingActivity<T>(contentLayoutId) {
+abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
     @Suppress("UNCHECKED_CAST")
-    val mViewModel: VM by viewModelsByVM()
-
+    lateinit var mViewModel: VM
 
     lateinit var mContext: Context
     lateinit var mActivity: Activity
@@ -90,17 +84,14 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor
     /**
      * make a Gloading.Holder wrap with current activity by default
      * override this method in subclass to do special initialization
-     * @see SpecialActivity
      */
     protected open fun initLoadingStatusViewIfNeed() {
-        if (mHolder == null) {
-            //bind status view to activity root view by default
+        if (mHolder == null) { //bind status view to activity root view by default
             mHolder = Gloading.getDefault().wrap(this).withRetry { onLoadRetry() }
         }
     }
 
-    protected open fun onLoadRetry() {
-        // override this method in subclass to do retry task
+    protected open fun onLoadRetry() { // override this method in subclass to do retry task
     }
 
     open fun showLoading() {

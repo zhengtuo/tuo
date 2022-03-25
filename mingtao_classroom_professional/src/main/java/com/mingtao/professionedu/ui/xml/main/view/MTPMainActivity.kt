@@ -3,7 +3,7 @@ package com.mingtao.professionedu.ui.xml.main.view
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivityMtpMainBinding
-import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.base.activity.BaseActivity
 import com.zheng.tuo.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.main.adapter.FragmentAdapter
 import com.mingtao.professionedu.ui.xml.main.viewmodel.MainVM

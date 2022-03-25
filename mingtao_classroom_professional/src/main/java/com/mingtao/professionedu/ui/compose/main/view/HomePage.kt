@@ -90,5 +90,4 @@ fun Modifier.redPoint(num: Int): Modifier = this.drawWithContent {
             }
         }
     }
-
 }

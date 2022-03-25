@@ -105,5 +105,7 @@ dependencies {
 
     //打印日志
     api "com.jakewharton.timber:timber:$versions.timber"
+    //compose viewModel
+    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
 
 }

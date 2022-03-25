@@ -7,7 +7,7 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import com.zheng.learn_android.R
 import com.zheng.learn_android.databinding.ActivityStorageBinding
-import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.base.activity.BaseActivity
 import com.zheng.lib.base.viewmodel.EmptyViewModel
 import timber.log.Timber
 import java.io.*

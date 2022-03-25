@@ -38,15 +38,6 @@ class MTPLoginVM @Inject constructor(private val mModel: LoginModel) : BaseViewM
         checked.set(false)
     }
 
-    fun getKey() {
-        launch({
-            loginLiveData.postValue(Resource.Loading())
-            loginLiveData.postValue(withContext(Dispatchers.IO) {
-                mModel.getKey()
-            })
-        })
-    }
-
     fun sendSms(phone: String, code: String) {
         launch({
             loginLiveData.postValue(Resource.Loading())
@@ -80,15 +71,12 @@ class MTPLoginVM @Inject constructor(private val mModel: LoginModel) : BaseViewM
                     delay(1000)
                     emit(it)
                 }
-            }.flowOn(Dispatchers.Default).onStart {
-                // 倒计时开始 ，在这里可以让Button 禁止点击状态
+            }.flowOn(Dispatchers.Default).onStart { // 倒计时开始 ，在这里可以让Button 禁止点击状态
                 smsEnable.set(false)
                 time.set(60)
-            }.onCompletion {
-                // 倒计时结束 ，在这里可以让Button 恢复点击状态
+            }.onCompletion { // 倒计时结束 ，在这里可以让Button 恢复点击状态
                 smsEnable.set(true)
-            }.collect {
-                // 在这里 更新LiveData 的值来显示到UI
+            }.collect { // 在这里 更新LiveData 的值来显示到UI
                 time.set(it)
             }
         })

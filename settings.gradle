@@ -13,3 +13,4 @@ project(':flutter_tuo').projectDir = new File('../tuo/flutter_tuo')
 include ':mingtao_classroom_professional'
 include ':comon'
 include ':learn_android'
+include ':base'

@@ -4,7 +4,7 @@ import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivityLoginBinding
-import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.base.activity.BaseActivity
 import com.zheng.lib.data.error.Error
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.utils.observe

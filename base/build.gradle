@@ -8,9 +8,5 @@ android {
 }
 
 dependencies {
-    api project(":base")
-
-    //PermissionX 郭霖写的权限库
-    api 'com.guolindev.permissionx:permissionx:1.6.1'
-
+    api project(":lib")
 }

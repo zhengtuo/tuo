@@ -24,38 +24,19 @@ class DataRepository @Inject constructor(
     private val dataGenerator: DataGenerator,
 ) {
 
-
-    suspend fun getKey(): Resource<Any> {
-        return processCallByApi(
-            {
-                dataGenerator.getRetrofitService(ApiService::class.java).getKey()
-            }, "getKey"
-        )
-    }
-
-    suspend fun sendSms(phone: String, type: Int, code: String): Resource<Any> {
-        return processCallByApi(
-            {
-                dataGenerator.getRetrofitService(ApiService::class.java).sendSms(
-                    phone, type, code
-                )
-            }, "sendSms"
-        )
+    suspend fun sendSms(phone: String, type: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).sendSms(phone, type)
+        }, "sendSms")
     }
 
     suspend fun codePhone(user_name: String, sms_code: String): Resource<Any> {
-        return processCallByApi(
-            {
-                dataGenerator.getRetrofitService(ApiService::class.java).codeLogin(
-                    user_name, sms_code
-                )
-            }, "codeLogin"
-        )
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).codeLogin(user_name, sms_code)
+        }, "codeLogin")
     }
 
-    private suspend fun processCallByApi(
-        responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String
-    ): Resource<Any> {
+    private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)
         if (!LibUtils.checkNet()) {
             return Resource.DataError(errorCode = NO_INTERNET_CONNECTION, null)

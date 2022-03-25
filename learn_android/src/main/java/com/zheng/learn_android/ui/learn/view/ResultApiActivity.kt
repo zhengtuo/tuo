@@ -10,7 +10,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.zheng.learn_android.R
 import com.zheng.learn_android.databinding.ActivityResultApiBinding
-import com.zheng.lib.base.activity.BaseActivity
+import com.zheng.base.activity.BaseActivity
 import com.zheng.lib.base.viewmodel.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
