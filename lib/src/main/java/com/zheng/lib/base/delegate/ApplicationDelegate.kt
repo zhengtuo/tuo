@@ -32,7 +32,7 @@ open class ApplicationDelegate(application: Application) : ApplicationLifecycle 
 
     override fun onCreate() {
 
-        LibUtils.init(mApplication)
+        //LibUtils.init(mApplication)
         // 在主进程中初始化相关数据
         if (LibUtils.isMainProcess(mApplication)) {
             if (isDebug) {                         // 这两行必须写在init之前，否则这些配置在init过程中将无效

@@ -11,20 +11,19 @@ import com.zheng.lib.base.viewmodel.BaseViewModel
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.tool.gloading.Gloading
 import com.zheng.lib.utils.observe
-
+import com.zheng.lib.utils.viewModelsComposeBy
 
 abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
     @Suppress("UNCHECKED_CAST")
-    lateinit var mViewModel: VM
+    val mViewModel: VM by viewModelsComposeBy()
 
     lateinit var mContext: Context
-    lateinit var mActivity: Activity
-
+    private lateinit var mActivity: Activity
 
     private var isFirstVisible = true
 
-    protected var mHolder: Gloading.Holder? = null
+    private var mHolder: Gloading.Holder? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +35,12 @@ abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
         observeViewModel()
         initSingleEvent()
         initData()
+
     }
 
     //初始化方法
     abstract fun initialization()
+
 
     /**
      * 事情监听器
@@ -59,7 +60,7 @@ abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
     /**
      * 初始化公共消息事件
      */
-    protected fun initSingleEvent() {
+    private fun initSingleEvent() {
         registerFinishEvent()
     }
 

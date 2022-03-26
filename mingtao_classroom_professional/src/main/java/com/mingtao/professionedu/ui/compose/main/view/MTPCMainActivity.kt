@@ -8,7 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MainVM
@@ -25,7 +24,7 @@ class MTPCMainActivity : ComponentActivity() {
         setContent {
             ComposeMTPTheme {
                 Column {
-                    val viewModel: MainVM = viewModel()
+                    //val viewModel: MainVM = viewModel()
                     HorizontalPager(count = 4,Modifier.weight(1F)) { page ->
                         when (page) {
                             0 -> HomePage(2)
@@ -34,9 +33,9 @@ class MTPCMainActivity : ComponentActivity() {
                             3 -> Box(Modifier.fillMaxSize())
                         }
                     }
-                    BottomTab(viewModel.selectedTab) {
-                        viewModel.selectedTab = it
-                    }
+//                    BottomTab(viewModel.selectedTab) {
+//                        viewModel.selectedTab = it
+//                    }
                 }
             }
         }

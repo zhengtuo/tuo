@@ -26,8 +26,6 @@ class MTPCLoginVM @Inject constructor(private val mModel: MTPCLoginModel) : Base
     //协议
     var checked by mutableStateOf(false)
 
-    var loginLiveData: MutableLiveData<Resource<Any>> = MutableLiveData()
-
     fun canSendCode(): Boolean {
         return phoneNumber.length == 11
     }
@@ -36,13 +34,14 @@ class MTPCLoginVM @Inject constructor(private val mModel: MTPCLoginModel) : Base
         return phoneNumber.length == 11 && code.length == 6
     }
 
-    suspend fun sendCode() {
+    fun sendCode() {
         if (!canSendCode()) {
             Toast.makeText(LibUtils.context, "请输入手机号码", Toast.LENGTH_SHORT).show()
             return
         }
         launch({
-            loginLiveData.postValue(withContext(Dispatchers.IO) {
+            dataLiveData.postValue(Resource.Loading())
+            dataLiveData.postValue(withContext(Dispatchers.IO) {
                 mModel.sendSms(phoneNumber, 2)
             })
         })

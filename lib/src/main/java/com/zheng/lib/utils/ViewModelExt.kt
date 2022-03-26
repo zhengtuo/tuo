@@ -9,11 +9,7 @@ import kotlinx.coroutines.flow.*
 import java.lang.reflect.ParameterizedType
 
 //ViewModel的范围 防止内存泄漏
-fun ViewModel.launch(
-    block: suspend CoroutineScope.() -> Unit,
-    onError: (e: Throwable) -> Unit = {},
-    onComplete: () -> Unit = {}
-): Job {
+fun ViewModel.launch(block: suspend CoroutineScope.() -> Unit, onError: (e: Throwable) -> Unit = {}, onComplete: () -> Unit = {}): Job {
     return viewModelScope.launch(CoroutineExceptionHandler { _, e -> onError(e) }) {
         try {
             block.invoke(this)
@@ -26,9 +22,7 @@ fun ViewModel.launch(
 //修改viewModels方法 根据泛型获取ViewModel实例
 @Suppress("UNCHECKED_CAST")
 @MainThread
-fun <VM : ViewModel> ComponentActivity.viewModelsByVM(
-    factoryProducer: (() -> ViewModelProvider.Factory)? = null
-): Lazy<VM> {
+fun <VM : ViewModel> ComponentActivity.viewModelsByVM(factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<VM> {
     val factoryPromise = factoryProducer ?: {
         defaultViewModelProviderFactory
     }
@@ -40,9 +34,19 @@ fun <VM : ViewModel> ComponentActivity.viewModelsByVM(
 //修改viewModels方法 根据泛型获取ViewModel实例
 @Suppress("UNCHECKED_CAST")
 @MainThread
-fun <VM : ViewModel> Fragment.viewModelsByVM(
-    factoryProducer: (() -> ViewModelProvider.Factory)? = null
-): Lazy<VM> {
+fun <VM : ViewModel> ComponentActivity.viewModelsComposeBy(factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<VM> {
+    val factoryPromise = factoryProducer ?: {
+        defaultViewModelProviderFactory
+    }
+    val type = javaClass.genericSuperclass as ParameterizedType
+    val classVM = type.actualTypeArguments[0] as Class<VM>
+    return ViewModelLazy(classVM.kotlin, { viewModelStore }, factoryPromise)
+}
+
+//修改viewModels方法 根据泛型获取ViewModel实例
+@Suppress("UNCHECKED_CAST")
+@MainThread
+fun <VM : ViewModel> Fragment.viewModelsByVM(factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<VM> {
     val factoryPromise = factoryProducer ?: {
         defaultViewModelProviderFactory
     }
@@ -52,11 +56,7 @@ fun <VM : ViewModel> Fragment.viewModelsByVM(
 }
 
 
-fun launch(
-    block: suspend CoroutineScope.() -> Unit,
-    onError: (e: Throwable) -> Unit = {},
-    onComplete: () -> Unit = {}
-): Job {
+fun launch(block: suspend CoroutineScope.() -> Unit, onError: (e: Throwable) -> Unit = {}, onComplete: () -> Unit = {}): Job {
     return GlobalScope.launch(CoroutineExceptionHandler { _, e -> onError(e) }) {
         try {
             Dispatchers.Unconfined
@@ -68,10 +68,7 @@ fun launch(
 }
 
 //添加try catch
-fun addTry(
-    block: () -> Unit,
-    onError: (e: Throwable) -> Unit = {}
-) {
+fun addTry(block: () -> Unit, onError: (e: Throwable) -> Unit = {}) {
     try {
         block.invoke()
     } catch (e: Exception) {
@@ -81,13 +78,7 @@ fun addTry(
 
 //倒计时
 @Suppress("unused")
-fun countDown(
-    job: Job?,
-    timeSpec: Long,
-    onStart: () -> Unit = {},
-    onCollect: (number: Long) -> Unit = {},
-    onCompletion: () -> Unit = {}
-): Job {
+fun countDown(job: Job?, timeSpec: Long, onStart: () -> Unit = {}, onCollect: (number: Long) -> Unit = {}, onCompletion: () -> Unit = {}): Job {
     job?.cancel()
     return launch({
         flow {
@@ -95,16 +86,13 @@ fun countDown(
                 delay(1000)
                 emit(it)
             }
-        }.flowOn(Dispatchers.Default).onStart {
-            // 倒计时开始
+        }.flowOn(Dispatchers.Default).onStart { // 倒计时开始
             onStart()
 
-        }.onCompletion {
-            //倒计时结束
+        }.onCompletion { //倒计时结束
             onCompletion()
 
-        }.collect {
-            // 在这里 更新LiveData 的值来显示到UI
+        }.collect { // 在这里 更新LiveData 的值来显示到UI
             onCollect(it)
         }
     })

@@ -43,23 +43,21 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
                 if (it.length <= 11) {
                     vm.phoneNumber = it
                 }
-            }, textStyle = TextStyle(fontSize = 15.sp), cursorBrush = SolidColor(Color.Gray),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone), decorationBox = { innerTextField ->
-                    Box(Modifier.fillMaxWidth().drawWithContent {
-                        drawContent()
-                        drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
-                    }) {
-                        if (vm.phoneNumber.isEmpty()) {
-                            Text(text = stringResource(R.string.place_input_phone), fontSize = 15.sp, color = Color.Gray)
-                        } else {
-                            Image(painterResource(id = R.mipmap.login_text_clear), contentDescription = "清除手机号码",
-                                modifier = Modifier.align(Alignment.CenterEnd).clickable {
-                                    vm.phoneNumber = ""
-                                })
-                        }
-                        innerTextField()
+            }, textStyle = TextStyle(fontSize = 15.sp), cursorBrush = SolidColor(Color.Gray), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone), decorationBox = { innerTextField ->
+                Box(Modifier.fillMaxWidth().drawWithContent {
+                    drawContent()
+                    drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
+                }) {
+                    if (vm.phoneNumber.isEmpty()) {
+                        Text(text = stringResource(R.string.place_input_phone), fontSize = 15.sp, color = Color.Gray)
+                    } else {
+                        Image(painterResource(id = R.mipmap.login_text_clear), contentDescription = "清除手机号码", modifier = Modifier.align(Alignment.CenterEnd).clickable {
+                            vm.phoneNumber = ""
+                        })
                     }
-                })
+                    innerTextField()
+                }
+            })
         }
         Spacer(Modifier.height(35.dp))
         Box(Modifier.fillMaxWidth().padding(horizontal = 30.dp)) {
@@ -67,28 +65,28 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
                 if (it.length <= 6) {
                     vm.code = it
                 }
-            }, textStyle = TextStyle(color = Color.Black, fontSize = 15.sp), singleLine = true, cursorBrush = SolidColor(Color.Gray),
-                decorationBox = { innerTextField ->
-                    Box(Modifier.fillMaxWidth().drawWithContent {
-                        drawContent()
-                        drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
-                    }) {
-                        if (vm.code.isEmpty()) {
-                            Text(text = stringResource(R.string.place_input_code), color = Color.Gray, fontSize = 15.sp)
-                        }
-                        Text("获取验证码", Modifier.align(Alignment.CenterEnd).clickable {
-
-                        }, if (vm.canSendCode()) color_47A3FF else color_c)
-                        innerTextField()
+            }, textStyle = TextStyle(color = Color.Black, fontSize = 15.sp), singleLine = true, cursorBrush = SolidColor(Color.Gray), decorationBox = { innerTextField ->
+                Box(Modifier.fillMaxWidth().drawWithContent {
+                    drawContent()
+                    drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
+                }) {
+                    if (vm.code.isEmpty()) {
+                        Text(text = stringResource(R.string.place_input_code), color = Color.Gray, fontSize = 15.sp)
                     }
-                })
+                    Text("获取验证码", Modifier.align(Alignment.CenterEnd).clickable(onClick = {
+                        //获取验证码
+                        vm.sendCode()
+                    }, indication = null, interactionSource = remember {
+                        MutableInteractionSource()
+                    }), if (vm.canSendCode()) color_47A3FF else color_c)
+                    innerTextField()
+                }
+            })
         }
         Spacer(Modifier.height(43.dp))
         Box(Modifier.padding(horizontal = 30.dp)) {
-            Box(Modifier.fillMaxWidth().background(if (vm.canLoginOrRegister()) color_47A3FF else color_F7F7F7, RoundedCornerShape(5.dp)).padding(
-                vertical = 12.dp)) {
-                Text(stringResource(R.string.login_and_register), Modifier.align(Alignment.Center),
-                    color = if (vm.canLoginOrRegister()) color_f else color_b, fontSize = 14.sp)
+            Box(Modifier.fillMaxWidth().background(if (vm.canLoginOrRegister()) color_47A3FF else color_F7F7F7, RoundedCornerShape(5.dp)).padding(vertical = 12.dp)) {
+                Text(stringResource(R.string.login_and_register), Modifier.align(Alignment.Center), color = if (vm.canLoginOrRegister()) color_f else color_b, fontSize = 14.sp)
             }
         }
         Box(Modifier.padding(top = 15.dp, bottom = 15.dp, end = 30.dp).align(Alignment.End)) {
@@ -109,8 +107,7 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
             }, indication = null, interactionSource = remember {
                 MutableInteractionSource()
             })) {
-                Image(painterResource(if (vm.checked) R.mipmap.login_select else R.mipmap.login_no_select), contentDescription = "协议",
-                    Modifier.size(12.dp).align(Alignment.CenterVertically))
+                Image(painterResource(if (vm.checked) R.mipmap.login_select else R.mipmap.login_no_select), contentDescription = "协议", Modifier.size(12.dp).align(Alignment.CenterVertically))
                 Spacer(Modifier.width(5.dp))
                 Text("同意并愿意遵守名淘尚科", color = color_b, fontSize = 12.sp)
             }

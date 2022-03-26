@@ -10,7 +10,7 @@ import com.mingtao.professionedu.databinding.ActivitySplashBinding
 import com.zheng.base.activity.BaseActivity
 import com.zheng.lib.utils.SharedPreferencesUtils
 import com.zheng.tuo.arouter.Router
-import com.zheng.tuo.arouter.RouterPath
+import com.zheng.comon.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.system.viewmodel.SplashVM
 import dagger.hilt.android.AndroidEntryPoint
 

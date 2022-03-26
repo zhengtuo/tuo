@@ -16,16 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.ui.compose.main.viewmodel.MainVM
 import com.mingtao.professionedu.ui.compose.theme.color_3081e4
 import com.mingtao.professionedu.ui.compose.theme.color_696969
 import com.mingtao.professionedu.ui.compose.theme.color_f
 
 @Composable
 fun BottomTab(selected: Int, onSelectedChanged: (Int) -> Unit) {
-    val viewModel: MainVM = viewModel()
+    //val viewModel: MainVM = viewModel()
     Row(Modifier.background(color_f)) {
         TabItem(if (selected == 0) R.mipmap.home_select else R.mipmap.home_normal, if (selected == 0) color_3081e4 else color_696969, "首页",
             Modifier

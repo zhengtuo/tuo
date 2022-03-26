@@ -6,22 +6,21 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
 import android.os.Process
 import android.provider.MediaStore
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.Toast
 import androidx.annotation.StringRes
 import com.zheng.lib.data.constants.LibConstants
 import com.zheng.lib.data.model.NetConfig
 import timber.log.Timber
-import java.io.File
 
 /**
  * @Author: Drelovey
@@ -100,9 +99,7 @@ object LibUtils {
     @JvmStatic
     fun checkNet(): Boolean {
         if (context == null) return false
-        return isWifiConnection(context!!) || isStationConnection(
-            context!!
-        )
+        return isWifiConnection(context!!) || isStationConnection(context!!)
     }
 
     //是否使用WIFI联网
@@ -150,9 +147,7 @@ object LibUtils {
         result = if (resId > 0) {
             context.resources.getDimensionPixelSize(resId)
         } else {
-            TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, result.toFloat(), Resources.getSystem().displayMetrics
-            ).toInt()
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, result.toFloat(), Resources.getSystem().displayMetrics).toInt()
         }
         return result
     }
@@ -191,6 +186,39 @@ object LibUtils {
                 e.printStackTrace()
             }
             cursor.close()
+        }
+        return null
+    }
+
+    //获取手机厂商
+    fun getDeviceBrand(): String {
+        return Build.BRAND
+    }
+
+    //获取手机型号
+    fun getDeviceModel(): String {
+        return Build.MODEL
+    }
+
+    //获取系统版本号
+    fun getSystemVersion(): String {
+        return Build.VERSION.RELEASE
+    }
+
+    //获取版本名
+    fun getVersionName(): String {
+        val packageInfo: PackageInfo = getPackageInfo(context!!) ?: return ""
+        return packageInfo.versionName ?: ""
+    }
+
+    private fun getPackageInfo(context: Context): PackageInfo? {
+        val pi: PackageInfo
+        try {
+            val pm = context.packageManager
+            pi = pm.getPackageInfo(context.packageName, PackageManager.GET_CONFIGURATIONS)
+            return pi
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
         }
         return null
     }

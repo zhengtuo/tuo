@@ -4,11 +4,19 @@ plugins {
 }
 apply from: rootProject.file('libbase.gradle')
 android {
-
+    //ARouter
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
 }
 
 dependencies {
-    api project(":base")
+
+    // ARouter组件化管理
+    api "com.alibaba:arouter-api:$versions.arouter"
+    kapt "com.alibaba:arouter-compiler:$versions.arouter"
 
     //PermissionX 郭霖写的权限库
     api 'com.guolindev.permissionx:permissionx:1.6.1'

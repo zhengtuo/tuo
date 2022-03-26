@@ -1,4 +1,4 @@
-package com.zheng.tuo.arouter
+package com.zheng.comon.arouter
 
 /**
  * Created by mmw on 2019/6/19.

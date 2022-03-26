@@ -6,8 +6,6 @@ plugins {
 apply from: rootProject.file('libbase.gradle')
 
 android {
-    //用于隔离不同model的资源文件
-    resourcePrefix "mtp_"
 
     defaultConfig {
         //ARouter
@@ -54,6 +52,7 @@ dependencies {
     if (!versions.is_application) {
         api project(":mingtao_classroom_professional")
     } else {
+        api project(":base")
         api project(":comon")
     }
 

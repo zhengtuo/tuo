@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivityMtpMainBinding
 import com.zheng.base.activity.BaseActivity
-import com.zheng.tuo.arouter.RouterPath
+import com.zheng.comon.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.main.adapter.FragmentAdapter
 import com.mingtao.professionedu.ui.xml.main.viewmodel.MainVM
 import dagger.hilt.android.AndroidEntryPoint

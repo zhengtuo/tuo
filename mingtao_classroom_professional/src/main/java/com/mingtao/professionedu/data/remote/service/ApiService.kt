@@ -18,7 +18,7 @@ interface ApiService {
     /**
      * 发送短信验证码
      */
-    @POST("smsLog/sendSms")
+    @POST("/smsLog/sendSms")
     @FormUrlEncoded
     suspend fun sendSms(@Field("phone") phone: String, @Field("codeType") codeType: Int): ApiResponse<BaseEntity<Any>>
 

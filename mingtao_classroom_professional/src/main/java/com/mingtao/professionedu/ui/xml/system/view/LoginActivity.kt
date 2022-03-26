@@ -5,11 +5,11 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivityLoginBinding
 import com.zheng.base.activity.BaseActivity
-import com.zheng.lib.data.error.Error
 import com.zheng.lib.data.model.Resource
 import com.zheng.lib.utils.observe
-import com.zheng.tuo.arouter.RouterPath
+import com.zheng.comon.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.system.viewmodel.MTPLoginVM
+import com.zheng.lib.data.error.Error
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

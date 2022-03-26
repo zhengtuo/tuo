@@ -1,7 +1,6 @@
 package com.zheng.lib.binding.listener
 
 import android.view.View
-import com.alibaba.android.arouter.launcher.ARouter
 import com.zheng.lib.utils.LibUtils.getActivityFromView
 
 
@@ -27,7 +26,7 @@ object CommonBinding {
     @JvmField
     var jumpClick: BindingClickT<String> = object : BindingClickT<String> {
         override fun click(t: String) {
-            ARouter.getInstance().build(t).navigation()
+            //ARouter.getInstance().build(t).navigation()
         }
     }
 
