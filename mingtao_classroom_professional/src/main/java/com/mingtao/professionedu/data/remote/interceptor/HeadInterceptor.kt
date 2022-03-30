@@ -1,7 +1,10 @@
 package com.mingtao.professionedu.data.remote.interceptor
 
+import com.mingtao.professionedu.utils.MTPUtils
+import com.skydoves.whatif.whatIf
+import com.zheng.comon.utils.CommonUtils
 import com.zheng.comon.utils.MD5Utils
-import com.zheng.lib.utils.LibUtils
+import com.zheng.comon.utils.SharedPreferencesUtils
 import okhttp3.FormBody
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -19,7 +22,7 @@ class HeadInterceptor : Interceptor {
 
     private val KEY = "eL3ZuSbj3mGCqNN5QiCqLmYlkEeJhZlv"
 
-    private val PHONE_INFO: String = LibUtils.getDeviceBrand() + ":" + LibUtils.getDeviceModel() + " Android:" + LibUtils.getSystemVersion() + " professionedu:V:" + LibUtils.getVersionName()
+    private val PHONE_INFO: String = CommonUtils.getDeviceBrand() + ":" + CommonUtils.getDeviceModel() + " Android:" + CommonUtils.getSystemVersion() + " professionedu:V:" + CommonUtils.getVersionName()
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var original = chain.request()
@@ -55,6 +58,9 @@ class HeadInterceptor : Interceptor {
             .addHeader("phoneInfo", PHONE_INFO)
             .addHeader("sourceFrom", "3")
             .addHeader("clientSource", "android")
+            .whatIf(MTPUtils.isLogin()) {
+                addHeader("Authorization",SharedPreferencesUtils.getString("token",""))
+            }
             .method(original.method, original.body)
             .build()
         return chain.proceed(request)

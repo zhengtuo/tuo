@@ -5,9 +5,6 @@ import android.content.Context
 import com.zheng.lib.base.lifecycle.ApplicationLifecycle
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.skydoves.whatif.whatIf
-import com.zheng.lib.BuildConfig
-import com.zheng.lib.tool.gloading.Gloading
-import com.zheng.lib.tool.gloading.GlobalAdapter
 import com.zheng.lib.utils.LibUtils
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -39,9 +36,6 @@ open class ApplicationDelegate(application: Application) : ApplicationLifecycle 
                 // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
             }
             initLiveEventBus()
-
-            Gloading.debug(BuildConfig.DEBUG)
-            Gloading.initDefault(GlobalAdapter())
         }
 
     }

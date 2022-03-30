@@ -5,21 +5,26 @@ package com.zheng.comon.arouter
  **/
 object RouterPath {
 
+
+    //mtp
+
     //system
-    const val PATH_SPLASH = "/app/system/splash"
+    const val MTP_PATH_SPLASH = "/mtp/system/splash"
 
-    const val PATH_LOGIN = "/app/system/login"
-
-    const val PATH_LOGIN_PHONE = "/app/system/login_phone"
 
     //main
-    const val PATH_MAIN = "/app/main/main"
+    const val MTP_PATH_MAIN = "/mtp/main/main"
 
     const val PATH_HOME_FRAGMENT = "/app/main/home"
 
     const val PATH_MY_FRAGMENT = "/app/main/my"
 
     const val PATH_INVITE_FRAGMENT = "/app/main/invite"
+
+    //login
+    const val MTP_PATH_LOGIN_CODE = "/mtp/login/login"
+
+    const val MTP_PATH_LOGIN_PASSWORD = "/mtp/system/login_phone"
 
 
     //learn

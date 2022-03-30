@@ -14,7 +14,7 @@ class MTPCLoginModel @Inject constructor(private val dataRepository: DataReposit
         return dataRepository.sendSms(phone, type)
     }
 
-    suspend fun login(user_name: String, sms_code: String): Resource<Any> {
-        return dataRepository.codePhone(user_name, sms_code)
+    suspend fun login(loginName: String, code: String, platform: String, loginType: Int): Resource<Any> {
+        return dataRepository.codeLogin(loginName, code, platform, loginType)
     }
 }

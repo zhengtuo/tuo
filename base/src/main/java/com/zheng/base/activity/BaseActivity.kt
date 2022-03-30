@@ -8,12 +8,11 @@ import android.os.Message
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.zheng.lib.base.viewmodel.BaseViewModel
 import com.skydoves.bindables.BindingActivity
+import com.zheng.base.utils.observe
+import com.zheng.base.utils.viewModelsByVM
+import com.zheng.base.viewmodel.BaseViewModel
 import com.zheng.lib.data.model.Resource
-import com.zheng.lib.tool.gloading.Gloading
-import com.zheng.lib.utils.observe
-import com.zheng.lib.utils.viewModelsByVM
 
 
 abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor(
@@ -23,15 +22,10 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor
     @Suppress("UNCHECKED_CAST")
     val mViewModel: VM by viewModelsByVM()
 
-
     lateinit var mContext: Context
     lateinit var mActivity: Activity
 
-
     private var isFirstVisible = true
-
-    protected var mHolder: Gloading.Holder? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,37 +79,6 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor
 
     open fun loadData() {
 
-    }
-
-    /**
-     * make a Gloading.Holder wrap with current activity by default
-     * override this method in subclass to do special initialization
-     * @see SpecialActivity
-     */
-    protected open fun initLoadingStatusViewIfNeed() {
-        if (mHolder == null) {
-            //bind status view to activity root view by default
-            mHolder = Gloading.getDefault().wrap(this).withRetry { onLoadRetry() }
-        }
-    }
-
-    protected open fun onLoadRetry() {
-        // override this method in subclass to do retry task
-    }
-
-    open fun showLoading() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoading()
-    }
-
-    open fun showLoadSuccess() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoadSuccess()
-    }
-
-    open fun showLoadFailed() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoadFailed()
     }
 
     /**

@@ -3,8 +3,8 @@ package com.zheng.tuo.app
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
+import com.zheng.base.delegate.ApplicationDelegate
 import com.zheng.lib.base.delegate.ApplicationDelegate
-import com.zheng.lib.data.model.NetConfig
 import com.zheng.lib.utils.LibUtils
 import com.zheng.tuo.BuildConfig
 import dagger.hilt.android.HiltAndroidApp

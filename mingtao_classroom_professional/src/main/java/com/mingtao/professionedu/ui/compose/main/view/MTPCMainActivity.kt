@@ -3,19 +3,22 @@ package com.mingtao.professionedu.ui.compose.main.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.mingtao.professionedu.ui.compose.main.viewmodel.MainVM
 import com.mingtao.professionedu.ui.compose.theme.ComposeMTPTheme
+import com.zheng.comon.arouter.RouterPath
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalPagerApi
 @AndroidEntryPoint
+@Route(path = RouterPath.MTP_PATH_MAIN)
 class MTPCMainActivity : ComponentActivity() {
 
 
@@ -25,7 +28,7 @@ class MTPCMainActivity : ComponentActivity() {
             ComposeMTPTheme {
                 Column {
                     //val viewModel: MainVM = viewModel()
-                    HorizontalPager(count = 4,Modifier.weight(1F)) { page ->
+                    HorizontalPager(count = 4, Modifier.weight(1F)) { page ->
                         when (page) {
                             0 -> HomePage(2)
                             1 -> Box(Modifier.fillMaxSize())

@@ -1,20 +1,16 @@
 package com.mingtao.professionedu.ui.xml.system.view
 
 import android.widget.Toast
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
+import com.mingtao.professionedu.base.activity.BaseMTPActivity
 import com.mingtao.professionedu.databinding.ActivityLoginBinding
-import com.zheng.base.activity.BaseActivity
-import com.zheng.lib.data.model.Resource
-import com.zheng.lib.utils.observe
-import com.zheng.comon.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.system.viewmodel.MTPLoginVM
 import com.zheng.lib.data.error.Error
+import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-@Route(path = RouterPath.PATH_LOGIN)
-class LoginActivity : BaseActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.activity_login) {
+class LoginActivity : BaseMTPActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.activity_login) {
     override fun initialization() {
 
         binding {
@@ -47,10 +43,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.ac
     }
 
 
-    override fun observeViewModel() {
-        observe(mViewModel.loginLiveData, ::handStateData)
-    }
-
     private fun handStateData(resource: Resource<*>) {
         when (resource) {
             is Resource.Loading -> showLoading()
@@ -75,7 +67,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.ac
                     if (it == Error.HAVE_MESSAGE) {
                         Toast.makeText(mContext, resource.errorCase ?: "", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(mContext, mViewModel.errorManager.getError(it).description, Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(mContext, mViewModel.errorManager.getError(it).description, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -85,12 +77,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.ac
         }
     }
 
-//    private fun listedSaveData(loginBean: LoginBean) {
-//        SharedPreferencesUtils.saveBoolean("privacy_policy_agree", true)
-//        SharedPreferencesUtils.saveString("phone", binding.etPhone.text.toString().trim())
-//        SharedPreferencesUtils.saveString("token", loginBean.token)
-//        SharedPreferencesUtils.saveString("userId", loginBean.user_id)
-//        finish()
-//        Router.getInstance().build(RouterPath.PATH_MAIN).navigation()
-//    }
 }

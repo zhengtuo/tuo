@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/learn_android" />
             <option value="$PROJECT_DIR$/lib" />
             <option value="$PROJECT_DIR$/mingtao_classroom_professional" />
+            <option value="$PROJECT_DIR$/network" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

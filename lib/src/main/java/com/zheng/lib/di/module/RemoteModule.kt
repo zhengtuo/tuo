@@ -106,7 +106,9 @@ class RemoteModule {
     ): Retrofit {
         return builder.client(okhttpClient).baseUrl(url)
             //kotlin
-            .addConverterFactory(MoshiConverterFactory.create()).addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create()).build()
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+            .build()
     }
 
 }

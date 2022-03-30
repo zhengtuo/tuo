@@ -7,11 +7,10 @@ import android.os.Bundle
 import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.Observer
-import com.zheng.lib.base.viewmodel.BaseViewModel
+import com.zheng.base.utils.observe
+import com.zheng.base.utils.viewModelsComposeBy
+import com.zheng.base.viewmodel.BaseViewModel
 import com.zheng.lib.data.model.Resource
-import com.zheng.lib.tool.gloading.Gloading
-import com.zheng.lib.utils.observe
-import com.zheng.lib.utils.viewModelsComposeBy
 
 abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
@@ -23,9 +22,6 @@ abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
     private var isFirstVisible = true
 
-    private var mHolder: Gloading.Holder? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = applicationContext
@@ -35,7 +31,6 @@ abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
         observeViewModel()
         initSingleEvent()
         initData()
-
     }
 
     //初始化方法
@@ -80,34 +75,6 @@ abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
     open fun loadData() {
 
-    }
-
-    /**
-     * make a Gloading.Holder wrap with current activity by default
-     * override this method in subclass to do special initialization
-     */
-    protected open fun initLoadingStatusViewIfNeed() {
-        if (mHolder == null) { //bind status view to activity root view by default
-            mHolder = Gloading.getDefault().wrap(this).withRetry { onLoadRetry() }
-        }
-    }
-
-    protected open fun onLoadRetry() { // override this method in subclass to do retry task
-    }
-
-    open fun showLoading() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoading()
-    }
-
-    open fun showLoadSuccess() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoadSuccess()
-    }
-
-    open fun showLoadFailed() {
-        initLoadingStatusViewIfNeed()
-        mHolder?.showLoadFailed()
     }
 
     /**

@@ -5,9 +5,13 @@ import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mingtao.professionedu.BuildConfig
 import com.mingtao.professionedu.data.remote.interceptor.HeadInterceptor
-import com.zheng.lib.base.delegate.ApplicationDelegate
-import com.zheng.lib.data.model.NetConfig
-import com.zheng.lib.utils.LibUtils
+import com.mingtao.professionedu.lib.gloading.Gloading
+import com.mingtao.professionedu.lib.gloading.GlobalAdapter
+import com.zheng.base.delegate.ApplicationDelegate
+import com.zheng.base.utils.BaseUtils
+import com.zheng.comon.utils.CommonUtils
+import com.zheng.network.config.RemoteConfig
+import com.zheng.network.model.NetConfig
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -35,10 +39,11 @@ open class MTPApp : Application() {
      * 初始化app相关
      */
     private fun initApp() {
-        LibUtils.context = this
-        LibUtils.setNetConstants(NetConfig().setBaseUrl("https://api.mtskedu.com/").setInterceptor(HeadInterceptor()))
-
+        BaseUtils.context = this
+        CommonUtils.init(this)
         initARouter()
+        RemoteConfig.initConfig(NetConfig().setBaseUrl("https://api.mtskedu.com/").setInterceptor(HeadInterceptor()))
+        Gloading.initDefault(GlobalAdapter())
     }
 
     private fun initARouter() {

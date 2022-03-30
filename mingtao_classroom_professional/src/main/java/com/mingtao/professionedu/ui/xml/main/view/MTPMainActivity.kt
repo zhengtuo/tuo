@@ -1,16 +1,13 @@
 package com.mingtao.professionedu.ui.xml.main.view
 
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.databinding.ActivityMtpMainBinding
-import com.zheng.base.activity.BaseActivity
-import com.zheng.comon.arouter.RouterPath
 import com.mingtao.professionedu.ui.xml.main.adapter.FragmentAdapter
 import com.mingtao.professionedu.ui.xml.main.viewmodel.MainVM
+import com.zheng.base.activity.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-@Route(path = RouterPath.PATH_MAIN)
 class MTPMainActivity : BaseActivity<ActivityMtpMainBinding, MainVM>(R.layout.activity_mtp_main) {
     override fun initialization() {
 

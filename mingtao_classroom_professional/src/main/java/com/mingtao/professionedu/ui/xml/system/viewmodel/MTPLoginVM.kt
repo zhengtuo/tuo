@@ -3,11 +3,11 @@ package com.mingtao.professionedu.ui.xml.system.viewmodel
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.zheng.lib.base.viewmodel.BaseViewModel
-import com.zheng.lib.data.model.Resource
-import com.zheng.lib.utils.LibUtils
-import com.zheng.lib.utils.launch
 import com.mingtao.professionedu.ui.xml.system.model.LoginModel
+import com.zheng.base.utils.launch
+import com.zheng.base.viewmodel.BaseViewModel
+import com.zheng.comon.utils.CommonUtils
+import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -51,12 +51,12 @@ class MTPLoginVM @Inject constructor(private val mModel: LoginModel) : BaseViewM
         if (checked.get() == true) {
             launch({
                 loginLiveData.postValue(Resource.Loading())
-                loginLiveData.postValue(withContext(Dispatchers.IO) {
-                    mModel.login(user_name, sms_code)
-                })
+//                loginLiveData.postValue(withContext(Dispatchers.IO) {
+//                    mModel.login(user_name, sms_code)
+//                })
             })
         } else {
-            Toast.makeText(LibUtils.context, "请勾选隐私协议", Toast.LENGTH_SHORT).show()
+            Toast.makeText(CommonUtils.context, "请勾选隐私协议", Toast.LENGTH_SHORT).show()
         }
     }
 

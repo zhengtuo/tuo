@@ -8,5 +8,22 @@ android {
 }
 
 dependencies {
-    api project(":lib")
+    //api project(":comon")
+    api "androidx.appcompat:appcompat:$versions.appcompat"
+
+    //bindables
+    api("com.github.skydoves:bindables:$versions.bindables") {
+        exclude group: "com.google.android.material"
+        exclude group: "org.jetbrains.kotlin"
+    }
+
+    //LiveEventBus是一款Android消息总线，基于LiveData，具有生命周期感知能力，支持Sticky，支持AndroidX，支持跨进程，支持跨APP
+    api 'com.jeremyliao:live-event-bus-x:1.7.3'
+
+    // 依赖注入框架 hilt
+    api "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-compiler:$versions.hilt"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    androidTestApi "com.google.dagger:hilt-android-testing:$versions.hilt"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$versions.hilt"
 }
