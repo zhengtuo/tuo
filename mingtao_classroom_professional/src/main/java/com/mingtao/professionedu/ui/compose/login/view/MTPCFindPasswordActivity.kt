@@ -2,7 +2,6 @@ package com.mingtao.professionedu.ui.compose.login.view
 
 import android.widget.Toast
 import androidx.activity.compose.setContent
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -10,8 +9,7 @@ import com.gyf.immersionbar.ImmersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.base.activity.BaseMTPCActivity
-import com.mingtao.professionedu.data.model.LoginBean
-import com.mingtao.professionedu.ui.compose.login.viewmodel.MTPCLoginVM
+import com.mingtao.professionedu.ui.compose.login.viewmodel.MTPCFindPasswordVM
 import com.mingtao.professionedu.ui.compose.theme.ComposeMTPTheme
 import com.zheng.comon.arouter.RouterPath
 import com.zheng.comon.error.ErrorManager
@@ -22,26 +20,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalPagerApi
 @AndroidEntryPoint
-@Route(path = RouterPath.MTP_PATH_LOGIN_CODE)
-class MTPCLoginActivity : BaseMTPCActivity<MTPCLoginVM>() {
-
-    @Autowired(name = "show_jump")
-    @JvmField
-    var showJump = false
-
+@Route(path = RouterPath.MTP_PATH_FIND_PASSWORD)
+class MTPCFindPasswordActivity : BaseMTPCActivity<MTPCFindPasswordVM>() {
 
     override fun initialization() {
         ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color_f).statusBarDarkFont(true).init()
         ARouter.getInstance().inject(this)
         setContent {
             ComposeMTPTheme {
-                LoginPage(mViewModel)
+                FindPasswordPage(mViewModel)
             }
-        }
-        mViewModel.showJump = showJump
-
-        LiveEventBus.get("finish").observe(this) {
-            finish()
         }
     }
 
@@ -54,23 +42,14 @@ class MTPCLoginActivity : BaseMTPCActivity<MTPCLoginVM>() {
                 if (resource.methodName == "sendSms") {
                     //发送成功的操作
                     mViewModel.countDown()
-                } else if (resource.methodName == "codeLogin") {
+                } else if (resource.methodName == "changePassword") {
                     //登录成功后的操作
-                    if (resource.data != null) {
-                        val data = resource.data as LoginBean
-                        SharedPreferencesUtils.saveString("phone", mViewModel.phoneNumber)
-                        SharedPreferencesUtils.saveInt("loginType", 1)
-                        SharedPreferencesUtils.saveString("token", data.rememberToken)
-
-                        if (data.intentionCourseId == "") {
-
-                        } else {
-                            //前往首页
-                            ARouter.getInstance().build(RouterPath.MTP_PATH_MAIN).navigation()
-                            finish()
-                        }
-                    }
-
+                    Toast.makeText(applicationContext, "密码重置成功，请重新登录", Toast.LENGTH_SHORT).show()
+                    SharedPreferencesUtils.saveString("userPassword", "")
+                    SharedPreferencesUtils.saveInt("loginType", 0)
+                    ARouter.getInstance().build(RouterPath.MTP_PATH_MAIN).navigation()
+                    LiveEventBus.get("finish").post("")
+                    finish()
                 }
             }
             is Resource.DataError -> {

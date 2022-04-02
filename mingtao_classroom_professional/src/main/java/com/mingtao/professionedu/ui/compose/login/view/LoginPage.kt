@@ -42,7 +42,7 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
                     Text(stringResource(R.string.mtp_skip), fontSize = 13.sp, color = color_47A3FF)
                 }
             } else {
-                Image(painterResource(R.mipmap.ic_back_arrow), "返回", Modifier.width(41.dp).height(49.dp).padding(15.dp).noClickable {
+                Image(painterResource(R.mipmap.mtp_back_arrow), "返回", Modifier.width(41.dp).height(49.dp).padding(15.dp).noClickable {
                     vm.finish()
                 })
             }
@@ -50,7 +50,7 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
 
         }
         Spacer(Modifier.height(44.dp))
-        Image(painterResource(R.mipmap.login_logo), "logo", Modifier.align(Alignment.CenterHorizontally))
+        Image(painterResource(R.mipmap.mtp_login_logo), "logo", Modifier.align(Alignment.CenterHorizontally))
         Spacer(Modifier.height(50.dp))
         Box(Modifier.fillMaxWidth().padding(horizontal = 30.dp)) {
             BasicTextField(value = vm.phoneNumber, onValueChange = {
@@ -65,7 +65,7 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
                     if (vm.phoneNumber.isEmpty()) {
                         Text(text = stringResource(R.string.mtp_place_input_phone), fontSize = 15.sp, color = Color.Gray)
                     } else {
-                        Image(painterResource(id = R.mipmap.login_text_clear), contentDescription = "清除手机号码", modifier = Modifier.align(Alignment.CenterEnd).clickable {
+                        Image(painterResource(id = R.mipmap.mtp_login_text_clear), contentDescription = "清除手机号码", modifier = Modifier.align(Alignment.CenterEnd).clickable {
                             vm.phoneNumber = ""
                         })
                     }
@@ -110,14 +110,14 @@ fun LoginPage(vm: MTPCLoginVM) { //垂直排列元素
         Text("第三方账号快捷登录", Modifier.align(Alignment.CenterHorizontally), color_b, 12.sp)
         Spacer(Modifier.height(20.dp))
         Row(Modifier.align(Alignment.CenterHorizontally)) {
-            Image(painterResource(R.mipmap.qq_login), "QQ登录", Modifier.size(36.dp))
+            Image(painterResource(R.mipmap.mtp_qq_login), "QQ登录", Modifier.size(36.dp))
             Spacer(Modifier.width(28.dp))
-            Image(painterResource(R.mipmap.wechat_login), "微信登录", Modifier.size(36.dp))
+            Image(painterResource(R.mipmap.mtp_wechat_login), "微信登录", Modifier.size(36.dp))
         }
         Spacer(Modifier.weight(1.0F))
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Row(Modifier.background(Color.Transparent).noClickable { vm.checked = !vm.checked }) {
-                Image(painterResource(if (vm.checked) R.mipmap.login_select else R.mipmap.login_no_select), contentDescription = "协议", Modifier.size(12.dp).align(Alignment.CenterVertically))
+                Image(painterResource(if (vm.checked) R.mipmap.mtp_login_select else R.mipmap.mtp_login_no_select), contentDescription = "协议", Modifier.size(12.dp).align(Alignment.CenterVertically))
                 Spacer(Modifier.width(5.dp))
                 Text("同意并愿意遵守名淘尚科", color = color_b, fontSize = 12.sp)
             }

@@ -10,10 +10,10 @@
     <application
         android:name="app.MTPApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/mtp_launcher"
         android:label="@string/mtp_app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.Light.NoActionBar">
+        android:theme="@style/mtp_Theme.Tuo">
         <activity
             android:name=".ui.compose.system.view.MTPCSplashActivity"
             android:exported="true">
@@ -26,6 +26,7 @@
         <activity android:name=".ui.compose.login.view.MTPCLoginActivity" />
         <activity android:name=".ui.compose.login.view.MTPCPasswordLoginActivity" />
         <activity android:name=".ui.compose.main.view.MTPCMainActivity" />
+        <activity android:name=".ui.compose.login.view.MTPCFindPasswordActivity" />
     </application>
 
 </manifest>

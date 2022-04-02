@@ -37,11 +37,11 @@ class MTPCSplashActivity : ComponentActivity() {
 
     private fun jump() {
         if (MTPUtils.isLogin()) {
-
+            ARouter.getInstance().build(RouterPath.MTP_PATH_MAIN).navigation()
         } else {
             ARouter.getInstance().build(RouterPath.MTP_PATH_LOGIN_CODE).withBoolean("show_jump", true).navigation()
-            finish()
         }
+        finish()
     }
 
     /**

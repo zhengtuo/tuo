@@ -26,6 +26,8 @@ object RouterPath {
 
     const val MTP_PATH_LOGIN_PASSWORD = "/mtp/system/login_phone"
 
+    const val MTP_PATH_FIND_PASSWORD = "/mtp/system/find_password"
+
 
     //learn
     const val PATH_LEARN_KOTLIN = "/app/learn/learnkotlin"

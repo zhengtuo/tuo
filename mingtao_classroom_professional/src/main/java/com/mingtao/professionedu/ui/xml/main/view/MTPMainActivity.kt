@@ -1,14 +1,14 @@
 package com.mingtao.professionedu.ui.xml.main.view
 
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.databinding.ActivityMtpMainBinding
+import com.mingtao.professionedu.databinding.MtpActivityMainBinding
 import com.mingtao.professionedu.ui.xml.main.adapter.FragmentAdapter
 import com.mingtao.professionedu.ui.xml.main.viewmodel.MainVM
 import com.zheng.base.activity.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MTPMainActivity : BaseActivity<ActivityMtpMainBinding, MainVM>(R.layout.activity_mtp_main) {
+class MTPMainActivity : BaseActivity<MtpActivityMainBinding, MainVM>(R.layout.mtp_activity_main) {
     override fun initialization() {
 
         binding {

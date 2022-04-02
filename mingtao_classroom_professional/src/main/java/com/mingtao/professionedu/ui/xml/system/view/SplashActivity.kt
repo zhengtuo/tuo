@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.databinding.ActivitySplashBinding
+import com.mingtao.professionedu.databinding.MtpActivitySplashBinding
 import com.mingtao.professionedu.ui.xml.system.viewmodel.SplashVM
 import com.zheng.base.activity.BaseActivity
 import com.zheng.comon.utils.SharedPreferencesUtils
@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashVM>(R.layout.activity_splash) {
+class SplashActivity : BaseActivity<MtpActivitySplashBinding, SplashVM>(R.layout.mtp_activity_splash) {
     //request permission
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission(), object : ActivityResultCallback<Boolean> {
         override fun onActivityResult(granted: Boolean) {

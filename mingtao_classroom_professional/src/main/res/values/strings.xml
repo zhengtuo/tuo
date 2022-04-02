@@ -17,4 +17,5 @@
     <string name="mtp_login">登录</string>
     <string name="mtp_code_login">验证码登录</string>
     <string name="mtp_find_password">找回密码</string>
+    <string name="mtp_change_password">修改密码</string>
 </resources>

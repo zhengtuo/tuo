@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.databinding.LayoutGlobalLoadingStatusBinding
+import com.mingtao.professionedu.databinding.MtpLayoutGlobalBinding
 import com.mingtao.professionedu.lib.gloading.Gloading.*
 
 
@@ -18,7 +18,7 @@ import com.mingtao.professionedu.lib.gloading.Gloading.*
  */
 @SuppressLint("ViewConstructor")
 class GlobalLoadingStatusView(context: Context, retryTask: Runnable) : LinearLayout(context) {
-    var mBinding: LayoutGlobalLoadingStatusBinding? = null
+    var mBinding: MtpLayoutGlobalBinding? = null
 
     private var mRetryTask: Runnable? = retryTask
     private var animationDrawable: AnimationDrawable
@@ -26,7 +26,7 @@ class GlobalLoadingStatusView(context: Context, retryTask: Runnable) : LinearLay
     init {
         orientation = VERTICAL
         gravity = Gravity.CENTER_HORIZONTAL
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_global_loading_status, this, true)
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.mtp_layout_global, this, true)
         isClickable = true
         animationDrawable = mBinding?.image?.drawable as AnimationDrawable
     }

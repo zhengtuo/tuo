@@ -3,16 +3,19 @@ package app
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mingtao.professionedu.BuildConfig
 import com.mingtao.professionedu.data.remote.interceptor.HeadInterceptor
 import com.mingtao.professionedu.lib.gloading.Gloading
 import com.mingtao.professionedu.lib.gloading.GlobalAdapter
+import com.skydoves.whatif.whatIf
 import com.zheng.base.delegate.ApplicationDelegate
 import com.zheng.base.utils.BaseUtils
 import com.zheng.comon.utils.CommonUtils
 import com.zheng.network.config.RemoteConfig
 import com.zheng.network.model.NetConfig
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 @HiltAndroidApp
 open class MTPApp : Application() {
@@ -44,6 +47,8 @@ open class MTPApp : Application() {
         initARouter()
         RemoteConfig.initConfig(NetConfig().setBaseUrl("https://api.mtskedu.com/").setInterceptor(HeadInterceptor()))
         Gloading.initDefault(GlobalAdapter())
+        Timber.plant(Timber.DebugTree())
+        initLiveEventBus()
     }
 
     private fun initARouter() {
@@ -52,5 +57,10 @@ open class MTPApp : Application() {
             ARouter.openDebug()                          // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this)
+    }
+
+    private fun initLiveEventBus() {
+        LiveEventBus.config().setContext(this).lifecycleObserverAlwaysActive(true).whatIf(BuildConfig.DEBUG, { enableLogger(true) }, { enableLogger(false) })
+
     }
 }

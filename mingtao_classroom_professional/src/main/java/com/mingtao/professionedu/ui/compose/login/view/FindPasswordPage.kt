@@ -23,15 +23,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alibaba.android.arouter.launcher.ARouter
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.ui.compose.login.viewmodel.MTPCPasswordLoginVM
+import com.mingtao.professionedu.ui.compose.login.viewmodel.MTPCFindPasswordVM
 import com.mingtao.professionedu.ui.compose.theme.*
-import com.zheng.comon.arouter.RouterPath
 
 
 @Composable
-fun PasswordLoginPage(vm: MTPCPasswordLoginVM) { //垂直排列元素
+fun FindPasswordPage(vm: MTPCFindPasswordVM) { //垂直排列元素
     Column(Modifier.background(color_f).fillMaxSize()) {
         Box(Modifier.fillMaxWidth()) {
             Image(painterResource(R.mipmap.mtp_back_arrow), "返回", Modifier.width(41.dp).height(49.dp).padding(15.dp).noClickable {
@@ -64,6 +62,25 @@ fun PasswordLoginPage(vm: MTPCPasswordLoginVM) { //垂直排列元素
         }
         Spacer(Modifier.height(35.dp))
         Box(Modifier.fillMaxWidth().padding(horizontal = 30.dp)) {
+            BasicTextField(value = vm.code, onValueChange = {
+                if (it.length <= 6) {
+                    vm.code = it
+                }
+            }, textStyle = TextStyle(color = Color.Black, fontSize = 15.sp), singleLine = true, cursorBrush = SolidColor(Color.Gray), decorationBox = { innerTextField ->
+                Box(Modifier.fillMaxWidth().drawWithContent {
+                    drawContent()
+                    drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
+                }) {
+                    if (vm.code.isEmpty()) {
+                        Text(text = stringResource(R.string.mtp_place_input_code), color = Color.Gray, fontSize = 15.sp)
+                    }
+                    Text(vm.time, Modifier.align(Alignment.CenterEnd).noClickable { vm.sendCode() }, if (vm.canSendCode()) color_47A3FF else color_c)
+                    innerTextField()
+                }
+            })
+        }
+        Spacer(Modifier.height(35.dp))
+        Box(Modifier.fillMaxWidth().padding(horizontal = 30.dp)) {
             BasicTextField(value = vm.password, onValueChange = {
                 if (it.length <= 16) {
                     vm.password = it
@@ -74,7 +91,7 @@ fun PasswordLoginPage(vm: MTPCPasswordLoginVM) { //垂直排列元素
                     drawLine(color_e, Offset(0F, size.height + 5.dp.toPx()), Offset(size.width, size.height + 5.dp.toPx()), 1.dp.toPx() / 2)
                 }) {
                     if (vm.password.isEmpty()) {
-                        Text(text = stringResource(R.string.mtp_place_input_password), color = Color.Gray, fontSize = 15.sp)
+                        Text("请输入新密码（6~16位字母或数字）", color = Color.Gray, fontSize = 15.sp)
                     }
                     Image(painterResource(if (vm.isCiphertext) R.mipmap.mtp_eyes else R.mipmap.mtp_eyes_pre), contentDescription = "清除手机号码", modifier = Modifier.align(Alignment.CenterEnd).clickable {
                         vm.isCiphertext = !vm.isCiphertext
@@ -83,56 +100,14 @@ fun PasswordLoginPage(vm: MTPCPasswordLoginVM) { //垂直排列元素
                 }
             })
         }
-        Spacer(Modifier.height(15.dp))
-        Row(Modifier.padding(horizontal = 30.dp).noClickable {
-            vm.rememberChecked = !vm.rememberChecked
-        }) {
-            Image(painterResource(if (vm.rememberChecked) R.mipmap.mtp_remember_password_select else R.mipmap.mtp_remember_password_unselect), contentDescription = "记住密码", Modifier.size(12.dp).align(Alignment.CenterVertically))
-            Spacer(Modifier.width(5.dp))
-            Text(stringResource(R.string.mtp_place_remember_password), color = color_b, fontSize = 11.sp)
-        }
-        Spacer(Modifier.height(28.dp))
+        Spacer(Modifier.height(35.dp))
         Box(Modifier.padding(horizontal = 30.dp).noClickable {
-            //点击登录
-            vm.login()
+            //点击修改
+            vm.changePassword()
         }) {
-            Box(Modifier.fillMaxWidth().background(if (vm.canLogin()) color_47A3FF else color_F7F7F7, RoundedCornerShape(5.dp)).padding(vertical = 12.dp)) {
-                Text(stringResource(R.string.mtp_login), Modifier.align(Alignment.Center), color = if (vm.canLogin()) color_f else color_b, fontSize = 14.sp)
+            Box(Modifier.fillMaxWidth().background(if (vm.canChange()) color_47A3FF else color_F7F7F7, RoundedCornerShape(5.dp)).padding(vertical = 12.dp)) {
+                Text(stringResource(R.string.mtp_change_password), Modifier.align(Alignment.Center), color = if (vm.canChange()) color_f else color_b, fontSize = 14.sp)
             }
-        }
-        Box(Modifier.padding(30.dp, 15.dp).fillMaxWidth()) {
-            Text(stringResource(R.string.mtp_find_password), Modifier.align(Alignment.CenterStart).noClickable {
-                //找回密码
-                ARouter.getInstance().build(RouterPath.MTP_PATH_FIND_PASSWORD).navigation()
-
-            }, color = color_47A3FF, fontSize = 13.sp)
-            Text(stringResource(R.string.mtp_code_login), Modifier.align(Alignment.CenterEnd).noClickable {
-                vm.finish()
-            }, color = color_47A3FF, fontSize = 13.sp)
-        }
-
-        Spacer(Modifier.weight(1.0F))
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Row(Modifier.background(Color.Transparent).noClickable { vm.checked = !vm.checked }) {
-                Image(painterResource(if (vm.checked) R.mipmap.mtp_login_select else R.mipmap.mtp_login_no_select), contentDescription = "协议", Modifier.size(12.dp).align(Alignment.CenterVertically))
-                Spacer(Modifier.width(5.dp))
-                Text("同意并愿意遵守名淘尚科", color = color_b, fontSize = 12.sp)
-            }
-            Spacer(Modifier.height(8.dp))
-            Row {
-                Text(stringResource(R.string.mtp_service_agreement), Modifier.noClickable {
-                    //点击用户服务协议
-                }, color_47A3FF, 12.sp)
-                Text("、", color = color_b, fontSize = 12.sp)
-                Text(stringResource(R.string.mtp_buy_agreement), Modifier.noClickable {
-                    //点击用户付费协议
-                }, color_47A3FF, 12.sp)
-                Text("、", color = color_b, fontSize = 12.sp)
-                Text(stringResource(R.string.mtp_conceal_agreement), Modifier.noClickable {
-                    //点击用户隐私协议
-                }, color_47A3FF, 12.sp)
-            }
-            Spacer(Modifier.height(28.dp))
         }
     }
 }

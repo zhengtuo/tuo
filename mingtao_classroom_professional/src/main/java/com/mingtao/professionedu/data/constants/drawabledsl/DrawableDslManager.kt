@@ -23,8 +23,8 @@ object DrawableDslManager {
         corner(5F)
     }
 
-    val main_tab_home_normal = resourceDrawable(R.mipmap.home_normal)
-    val main_tab_home_select = resourceDrawable(R.mipmap.home_select)
+    val main_tab_home_normal = resourceDrawable(R.mipmap.mtp_home_normal)
+    val main_tab_home_select = resourceDrawable(R.mipmap.mtp_home_select)
 
     @JvmField
     val tab_home = selectorDrawable {
@@ -32,8 +32,8 @@ object DrawableDslManager {
         checked = main_tab_home_select
     }
 
-    val main_tab_study_normal = resourceDrawable(R.mipmap.study_normal)
-    val main_tab_study_select = resourceDrawable(R.mipmap.study_select)
+    val main_tab_study_normal = resourceDrawable(R.mipmap.mtp_study_normal)
+    val main_tab_study_select = resourceDrawable(R.mipmap.mtp_study_select)
 
     @JvmField
     val tab_study = selectorDrawable {
@@ -41,8 +41,8 @@ object DrawableDslManager {
         checked = main_tab_study_select
     }
 
-    val main_tab_find_normal = resourceDrawable(R.mipmap.news_normal)
-    val main_tab_find_select = resourceDrawable(R.mipmap.news_select)
+    val main_tab_find_normal = resourceDrawable(R.mipmap.mtp_news_normal)
+    val main_tab_find_select = resourceDrawable(R.mipmap.mtp_news_select)
 
     @JvmField
     val tab_find = selectorDrawable {
@@ -50,8 +50,8 @@ object DrawableDslManager {
         checked = main_tab_find_select
     }
 
-    val main_tab_my_normal = resourceDrawable(R.mipmap.user_normal)
-    val main_tab_my_select = resourceDrawable(R.mipmap.user_select)
+    val main_tab_my_normal = resourceDrawable(R.mipmap.mtp_user_normal)
+    val main_tab_my_select = resourceDrawable(R.mipmap.mtp_user_select)
 
     @JvmField
     val tab_my = selectorDrawable {

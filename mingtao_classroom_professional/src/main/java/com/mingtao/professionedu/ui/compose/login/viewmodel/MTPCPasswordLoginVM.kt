@@ -8,6 +8,7 @@ import com.mingtao.professionedu.ui.compose.login.model.MTPCPasswordLoginModel
 import com.zheng.base.utils.BaseUtils
 import com.zheng.base.utils.launch
 import com.zheng.base.viewmodel.BaseViewModel
+import com.zheng.comon.utils.SharedPreferencesUtils
 import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,10 +27,17 @@ class MTPCPasswordLoginVM @Inject constructor(private val mModel: MTPCPasswordLo
     var checked by mutableStateOf(false)
 
     //记住密码
-    var rememberChecked by mutableStateOf(false)
+    var rememberChecked by mutableStateOf(SharedPreferencesUtils.getBoolean("pw_remember", false))
 
     //密码是否密文
     var isCiphertext by mutableStateOf(true)
+
+    init {
+        if (SharedPreferencesUtils.getBoolean("pw_remember", false)) {
+            phoneNumber = SharedPreferencesUtils.getString("phone", "")
+            password = SharedPreferencesUtils.getString("userPassword", "")
+        }
+    }
 
 
     fun canLogin(): Boolean {
@@ -48,7 +56,7 @@ class MTPCPasswordLoginVM @Inject constructor(private val mModel: MTPCPasswordLo
         launch({
             dataLiveData.postValue(Resource.Loading())
             dataLiveData.postValue(withContext(Dispatchers.IO) {
-                mModel.passwordLogin(phoneNumber, password, "android", 1)
+                mModel.passwordLogin(phoneNumber, password, "android", 0)
             })
         })
     }

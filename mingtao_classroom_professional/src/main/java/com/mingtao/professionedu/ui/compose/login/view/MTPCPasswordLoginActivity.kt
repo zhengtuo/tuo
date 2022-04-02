@@ -2,6 +2,7 @@ package com.mingtao.professionedu.ui.compose.login.view
 
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -23,6 +24,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @Route(path = RouterPath.MTP_PATH_LOGIN_PASSWORD)
 class MTPCPasswordLoginActivity : BaseMTPCActivity<MTPCPasswordLoginVM>() {
 
+
+    @Autowired
+    @JvmField
+    var phone: String? = null
+
     override fun initialization() {
         ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color_f).statusBarDarkFont(true).init()
         ARouter.getInstance().inject(this)
@@ -31,19 +37,23 @@ class MTPCPasswordLoginActivity : BaseMTPCActivity<MTPCPasswordLoginVM>() {
                 PasswordLoginPage(mViewModel)
             }
         }
-    }
 
+        mViewModel.phoneNumber = phone?:""
+
+    }
 
     override fun handleData(resource: Resource<*>) {
         when (resource) {
             is Resource.Loading -> showLoading()
             is Resource.Success -> {
                 showLoadSuccess()
-                if (resource.methodName == "codeLogin") {
+                if (resource.methodName == "passwordLogin") {
                     //登录成功后的操作
                     if (resource.data != null) {
                         val data = resource.data as LoginBean
                         SharedPreferencesUtils.saveString("phone", mViewModel.phoneNumber)
+                        SharedPreferencesUtils.saveString("userPassword", mViewModel.password)
+                        SharedPreferencesUtils.saveBoolean("pw_remember", mViewModel.rememberChecked)
                         SharedPreferencesUtils.saveInt("loginType", 1)
                         SharedPreferencesUtils.saveString("token", data.rememberToken)
 

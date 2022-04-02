@@ -3,14 +3,14 @@ package com.mingtao.professionedu.ui.xml.system.view
 import android.widget.Toast
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.base.activity.BaseMTPActivity
-import com.mingtao.professionedu.databinding.ActivityLoginBinding
+import com.mingtao.professionedu.databinding.MtpActivityLoginBinding
 import com.mingtao.professionedu.ui.xml.system.viewmodel.MTPLoginVM
 import com.zheng.lib.data.error.Error
 import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : BaseMTPActivity<ActivityLoginBinding, MTPLoginVM>(R.layout.activity_login) {
+class LoginActivity : BaseMTPActivity<MtpActivityLoginBinding, MTPLoginVM>(R.layout.mtp_activity_login) {
     override fun initialization() {
 
         binding {

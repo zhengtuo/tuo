@@ -11,6 +11,6 @@ import javax.inject.Inject
 class MTPCPasswordLoginModel @Inject constructor(private val dataRepository: DataRepository) {
 
     suspend fun passwordLogin(loginName: String, code: String, platform: String, loginType: Int): Resource<Any> {
-        return dataRepository.codeLogin(loginName, code, platform, loginType)
+        return dataRepository.passwordLogin(loginName, code, platform, loginType)
     }
 }

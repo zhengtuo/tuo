@@ -41,6 +41,12 @@ class DataRepository @Inject constructor(
         }, "passwordLogin")
     }
 
+    suspend fun changePassword(loginName: String, password: String, code: String, codeType: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).changePassword(loginName, password, code, codeType)
+        }, "changePassword")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)
