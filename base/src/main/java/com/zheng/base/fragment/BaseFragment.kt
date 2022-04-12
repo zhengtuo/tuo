@@ -12,7 +12,7 @@ import com.skydoves.bindables.BindingFragment
 import com.zheng.base.utils.observe
 import com.zheng.base.utils.viewModelsByVM
 import com.zheng.base.viewmodel.BaseViewModel
-import com.zheng.lib.data.model.Resource
+import com.zheng.base.data.model.Resource
 
 
 abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel> constructor(

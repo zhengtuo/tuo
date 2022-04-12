@@ -1,7 +1,7 @@
 package com.mingtao.professionedu.ui.compose.login.model
 
 import com.mingtao.professionedu.data.DataRepository
-import com.zheng.lib.data.model.Resource
+import com.zheng.base.data.model.Resource
 import javax.inject.Inject
 
 /**

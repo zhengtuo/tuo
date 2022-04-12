@@ -3,9 +3,9 @@ package app
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
+import com.zheng.base.delegate.ApplicationDelegate
+import com.zheng.comon.utils.CommonUtils
 import com.zheng.learn_android.BuildConfig
-import com.zheng.lib.base.delegate.ApplicationDelegate
-import com.zheng.lib.utils.LibUtils
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -19,8 +19,6 @@ open class LKApp : Application() {
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-        mApplicationDelegate = ApplicationDelegate(this)
-        mApplicationDelegate.attachBaseContext(base, BuildConfig.DEBUG)
     }
 
     override fun onCreate() {
@@ -33,7 +31,7 @@ open class LKApp : Application() {
      * 初始化app相关
      */
     private fun initApp() {
-        LibUtils.context = this
+        CommonUtils.context = this
         //LibUtils.setNetConstants(NetConfig().setBaseUrl("http://php.mingtaoedu.com/mt/public/index.php/").setInterceptor(HeadInterceptor()))
 
         initARouter()

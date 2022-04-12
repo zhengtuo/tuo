@@ -5,8 +5,8 @@ package com.zheng.base.viewmodel
 import android.os.Message
 import androidx.lifecycle.MutableLiveData
 import com.skydoves.bindables.BindingViewModel
+import com.zheng.base.data.model.Resource
 import com.zheng.base.livedata.SingleLiveEvent
-import com.zheng.lib.data.model.Resource
 
 
 open class BaseViewModel : BindingViewModel() {

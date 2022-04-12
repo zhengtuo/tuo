@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".LKMainActivity"
+            android:name=".ui.main.view.LKMainActivity"
             android:exported="true" />
     </application>
 

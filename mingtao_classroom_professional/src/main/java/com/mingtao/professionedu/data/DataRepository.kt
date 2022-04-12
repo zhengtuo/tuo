@@ -6,11 +6,11 @@ import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
+import com.zheng.base.data.model.Resource
 import com.zheng.comon.utils.CommonUtils
 import com.zheng.lib.data.error.Error.Companion.HAVE_MESSAGE
 import com.zheng.lib.data.error.Error.Companion.NO_INTERNET_CONNECTION
 import com.zheng.lib.data.error.Error.Companion.UN_KNOW
-import com.zheng.lib.data.model.Resource
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -47,6 +47,30 @@ class DataRepository @Inject constructor(
         }, "changePassword")
     }
 
+    suspend fun getHotSearchKeyword(): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getHotSearchKeyword()
+        }, "getHotSearchKeyword")
+    }
+
+    suspend fun getBannerList(position: String): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getBannerList(position)
+        }, "getBannerList")
+    }
+
+    suspend fun getHomeType(): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getHomeType()
+        }, "getHomeType")
+    }
+
+    suspend fun getArticleList(page: Int, pageSize: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getArticleList(page, pageSize)
+        }, "getArticleList")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)
@@ -54,7 +78,6 @@ class DataRepository @Inject constructor(
             return Resource.DataError(errorCode = NO_INTERNET_CONNECTION, null)
         }
         val response = responseCall.invoke()
-
         response.suspendOnSuccess {
             result = if (data.code == 0) {
                 Resource.Success(data = data.data, methodName = methodName)
@@ -67,6 +90,7 @@ class DataRepository @Inject constructor(
         }
 
         response.suspendOnFailure {
+            Timber.tag(methodName).d(this)
             result = Resource.DataError(errorCode = UN_KNOW, null)
             Timber.tag(methodName).d(this)
         }

@@ -74,8 +74,12 @@ dependencies {
     api "androidx.compose.ui:ui-tooling-preview:$versions.compose_version"
     api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     api 'androidx.activity:activity-compose:1.4.0'
-    //api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
-    api "com.google.accompanist:accompanist-pager:0.24.2-alpha"
+    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
+    implementation "com.google.accompanist:accompanist-pager:0.24.3-alpha"
+
+    //图片加载
+    implementation "io.coil-kt:coil-compose:2.0.0-rc01"
+
     debugApi "androidx.compose.ui:ui-tooling:$versions.compose_version"
 
     //放弃xml写drawable，试试DSL写法 https://github.com/forJrking/DrawableDsl

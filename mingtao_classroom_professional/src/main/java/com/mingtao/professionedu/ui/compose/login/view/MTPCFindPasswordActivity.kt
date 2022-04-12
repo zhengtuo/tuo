@@ -11,11 +11,11 @@ import com.mingtao.professionedu.R
 import com.mingtao.professionedu.base.activity.BaseMTPCActivity
 import com.mingtao.professionedu.ui.compose.login.viewmodel.MTPCFindPasswordVM
 import com.mingtao.professionedu.ui.compose.theme.ComposeMTPTheme
+import com.zheng.base.data.model.Resource
 import com.zheng.comon.arouter.RouterPath
 import com.zheng.comon.error.ErrorManager
 import com.zheng.comon.utils.SharedPreferencesUtils
 import com.zheng.lib.data.error.Error
-import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalPagerApi

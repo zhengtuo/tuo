@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="com.zheng.lib.R" />
+        <import type="com.zheng.comon.R" />
 
         <import type="android.view.View" />
 
@@ -12,7 +12,7 @@
 
         <variable
             name="utils"
-            type="com.zheng.lib.utils.LibUtils" />
+            type="com.zheng.comon.utils.CommonUtils" />
 
         <variable
             name="backgroundColor"

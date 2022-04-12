@@ -73,8 +73,8 @@ dependencies {
     api "com.github.skydoves:sandwich:$versions.sandwich"
 
     //kotlinx.coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+//    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+//    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 
 
     //glide图片加载

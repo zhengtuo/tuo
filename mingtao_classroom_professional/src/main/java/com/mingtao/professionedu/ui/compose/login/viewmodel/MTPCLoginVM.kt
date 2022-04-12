@@ -6,11 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.alibaba.android.arouter.launcher.ARouter
 import com.mingtao.professionedu.ui.compose.login.model.MTPCLoginModel
+import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.BaseUtils
 import com.zheng.base.utils.launch
 import com.zheng.base.viewmodel.BaseViewModel
 import com.zheng.comon.arouter.RouterPath
-import com.zheng.lib.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

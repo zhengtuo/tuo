@@ -8,7 +8,7 @@ import com.mingtao.professionedu.ui.compose.login.model.MTPCFindPasswordModel
 import com.zheng.base.utils.BaseUtils
 import com.zheng.base.utils.launch
 import com.zheng.base.viewmodel.BaseViewModel
-import com.zheng.lib.data.model.Resource
+import com.zheng.base.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

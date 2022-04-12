@@ -1,10 +1,10 @@
 package com.zheng.learn_android.ui.learn.view
 
 import android.content.Intent
+import com.zheng.base.activity.BaseActivity
+import com.zheng.base.viewmodel.EmptyViewModel
 import com.zheng.learn_android.R
 import com.zheng.learn_android.databinding.ActivityGetResultBinding
-import com.zheng.base.activity.BaseActivity
-import com.zheng.lib.base.viewmodel.EmptyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

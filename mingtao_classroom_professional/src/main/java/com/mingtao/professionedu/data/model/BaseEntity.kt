@@ -10,5 +10,5 @@ import com.squareup.moshi.JsonClass
 //@JsonClass moshi必备
 @JsonClass(generateAdapter = true)
 data class BaseEntity<T>(
-    var code: Int = 0, var data: T? = null, var status: Boolean = false, var msg: String
+    var code: Int = 0, var data: T? = null, var status: Boolean = false, var msg: String = ""
 )

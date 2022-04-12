@@ -45,6 +45,7 @@ android {
 
 dependencies {
     api project(":comon")
+    api project(":base")
     //arouter
     kapt "com.alibaba:arouter-compiler:$versions.arouter"
     //room

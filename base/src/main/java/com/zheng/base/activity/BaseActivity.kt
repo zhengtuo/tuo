@@ -9,10 +9,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.skydoves.bindables.BindingActivity
+import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.observe
 import com.zheng.base.utils.viewModelsByVM
 import com.zheng.base.viewmodel.BaseViewModel
-import com.zheng.lib.data.model.Resource
 
 
 abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel> constructor(

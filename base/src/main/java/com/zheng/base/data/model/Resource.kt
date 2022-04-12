@@ -1,4 +1,4 @@
-package com.zheng.lib.data.model
+package com.zheng.base.data.model
 
 /**
  * @Author: Drelovey

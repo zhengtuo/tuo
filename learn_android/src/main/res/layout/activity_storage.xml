@@ -9,7 +9,7 @@
             name="title"
             type="String" />
 
-        <import type="com.zheng.lib.utils.LibUtils" />
+        <import type="com.zheng.comon.utils.CommonUtils" />
 
     </data>
 
@@ -26,7 +26,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:url='@{LibUtils.getImageForMedia("result_api_1.png")}' />
+            app:url='@{CommonUtils.getImageForMedia("result_api_1.png")}' />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

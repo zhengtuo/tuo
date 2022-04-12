@@ -13,7 +13,7 @@
             name="sv"
             type="android.view.View" />
 
-        <import type="com.zheng.lib.utils.LibUtils" />
+        <import type="com.zheng.comon.utils.CommonUtils" />
 
     </data>
 
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_200"
                     app:photoview_enable="@{true}"
-                    app:url='@{LibUtils.getImageForMedia("result_api_1.png")}' />
+                    app:url='@{CommonUtils.getImageForMedia("result_api_1.png")}' />
 
                 <com.zheng.learn_android.utils.IconFontView
                     android:id="@+id/ic_icon2"
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_200"
                     app:photoview_enable="@{true}"
-                    app:url='@{LibUtils.getImageForMedia("result_api_2.png")}' />
+                    app:url='@{CommonUtils.getImageForMedia("result_api_2.png")}' />
 
                 <com.zheng.learn_android.utils.IconFontView
                     android:id="@+id/ic_contract"
@@ -154,7 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    app:url='@{LibUtils.getImageForMedia("result_api_3.png")}'
+                    app:url='@{CommonUtils.getImageForMedia("result_api_3.png")}'
                     tools:ignore="ContentDescription" />
 
                 <com.zheng.learn_android.utils.IconFontView
@@ -177,14 +177,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    app:url='@{LibUtils.getImageForMedia("result_api_4.png")}'
+                    app:url='@{CommonUtils.getImageForMedia("result_api_4.png")}'
                     tools:ignore="ContentDescription" />
 
                 <com.bm.library.PhotoView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_200"
                     app:photoview_enable="@{true}"
-                    app:url='@{LibUtils.getImageForMedia("result_api_5.png")}' />
+                    app:url='@{CommonUtils.getImageForMedia("result_api_5.png")}' />
 
             </LinearLayout>
         </ScrollView>

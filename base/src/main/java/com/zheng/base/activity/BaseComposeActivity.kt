@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.Observer
+import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.observe
 import com.zheng.base.utils.viewModelsComposeBy
 import com.zheng.base.viewmodel.BaseViewModel
-import com.zheng.lib.data.model.Resource
 
 abstract class BaseComposeActivity<VM : BaseViewModel> : ComponentActivity() {
 
