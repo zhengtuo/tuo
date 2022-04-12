@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mingtao.professionedu.data.model.BannerBean
 import com.mingtao.professionedu.data.model.HomeArticleBean
+import com.mingtao.professionedu.data.model.HomeFloorModuleBean
 import com.mingtao.professionedu.data.model.HomeTypeBean
 import com.mingtao.professionedu.ui.compose.main.model.MTPCHomeModel
 import com.zheng.base.data.model.Resource
@@ -34,6 +35,9 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
     //首页资讯
     var articles = mutableStateOf(listOf<HomeArticleBean>())
 
+    //首页课程推荐
+    var recommends = mutableStateOf(listOf<HomeFloorModuleBean>())
+
     init {
         getData()
     }
@@ -56,6 +60,9 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
                 datas.add(async {
                     mModel.getArticleList(1, 2)
                 })
+                datas.add(async {
+                    mModel.getHomeFloorModule(1, 12)
+                })
                 datas.forEach { it.await() }
                 withContext(Dispatchers.Main) {
                     datas.forEach {
@@ -70,6 +77,8 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
                                     "getHomeType" -> homeTypes.value = resource.data as List<HomeTypeBean>
 
                                     "getArticleList" -> articles.value = resource.data as List<HomeArticleBean>
+
+                                    "getHomeFloorModule"-> recommends.value = resource.data as List<HomeFloorModuleBean>
                                 }
                             } else {
                                 LiveEventBus.get("handleData").post(resource)

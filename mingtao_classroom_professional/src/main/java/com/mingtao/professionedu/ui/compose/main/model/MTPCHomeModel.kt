@@ -25,4 +25,8 @@ class MTPCHomeModel @Inject constructor(private val dataRepository: DataReposito
     suspend fun getArticleList(page: Int, pageSize: Int): Resource<Any> {
         return dataRepository.getArticleList(page, pageSize)
     }
+
+    suspend fun getHomeFloorModule(page: Int, pageSize: Int): Resource<Any> {
+        return dataRepository.getHomeFloorModule(page, pageSize)
+    }
 }

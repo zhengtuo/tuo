@@ -71,6 +71,12 @@ class DataRepository @Inject constructor(
         }, "getArticleList")
     }
 
+    suspend fun getHomeFloorModule(page: Int, pageSize: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getHomeFloorModule(page, pageSize)
+        }, "getHomeFloorModule")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)

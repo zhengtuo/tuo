@@ -49,4 +49,8 @@ interface ApiService {
     //首页资讯列表
     @GET("/article/findList?platform=app")
     suspend fun getArticleList(@Query("page") page: Int, @Query("limit") pageSize: Int): ApiResponse<BaseEntity<List<HomeArticleBean>>>
+
+    //首页课程楼层
+    @GET("/floorModule/findList?locationType=1")
+    suspend fun getHomeFloorModule(@Query("page") page: Int, @Query("limit") pageSize: Int): ApiResponse<BaseEntity<List<HomeFloorModuleBean>>>
 }

@@ -27,7 +27,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.mingtao.professionedu.R
+import com.mingtao.professionedu.data.model.CourseBean
+import com.mingtao.professionedu.data.model.HomeFloorModuleBean
 import com.mingtao.professionedu.data.model.HomeTypeBean
+import com.mingtao.professionedu.ui.compose.login.view.noClickable
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCHomeVM
 import com.mingtao.professionedu.ui.compose.theme.color_F7F7F7
 import com.mingtao.professionedu.ui.compose.theme.color_b
@@ -70,9 +73,11 @@ fun HomePage(vm: MTPCHomeVM = viewModel()) {
             item {
                 HomeArticle(vm)
             }
-
-
-
+            if (vm.recommends.value.isNotEmpty()) {
+                items(vm.recommends.value.size) { index ->
+                    HomeRecommendItem(vm.recommends.value[index])
+                }
+            }
 
         }
     }
@@ -202,6 +207,72 @@ fun HomeArticle(vm: MTPCHomeVM) {
 
             }
 
+        }
+    }
+}
+
+
+@ExperimentalPagerApi
+@Composable
+fun HomeRecommendItem(homeFloorModuleBean: HomeFloorModuleBean) {
+    Column {
+        Row(Modifier.padding(start = 15.dp, top = 20.dp, bottom = 15.dp, end = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(homeFloorModuleBean.floorModuleName, Modifier.weight(1F), fontSize = 17.sp)
+            Text(if (homeFloorModuleBean.jumpType == 1) "换一换" else "更多", fontSize = 12.sp, color = color_b)
+            Spacer(Modifier.width(5.dp))
+            Image(painterResource(R.mipmap.mtp_home_item_more), modifier = Modifier.size(12.dp), contentDescription = null)
+        }
+
+        val pagerState = rememberPagerState(0)
+
+        val isCourse = homeFloorModuleBean.courseType == 1
+
+        val count = if (isCourse) homeFloorModuleBean.courseEntityList!!.size else homeFloorModuleBean.courseGoodsEntityList!!.size
+        val pageCount = (count + 4 - 1) / 4
+
+        HorizontalPager(count = pageCount, state = pagerState) { index ->
+            //Text(text = index.toString())
+            Row {
+                for (column in 0 until 4) {
+                    //itemIndex List数据位置
+                    val itemIndex = index * 4 + column
+                    HomeRecommendViewPageItem(Modifier.weight(1F), if (itemIndex > count) null else )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeRecommendCourseItem(modifier: Modifier, courseBean: CourseBean?) {
+    if (courseBean == null) {
+        Box(modifier) {
+
+        }
+    } else {
+        Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(10.dp))
+            AsyncImage(model = courseBean.thumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158/89F))
+            Spacer(Modifier.height(6.dp))
+            Text(homeTypeBean.homePageOperationCategoryName, fontSize = 12.sp)
+            Spacer(Modifier.height(5.dp))
+        }
+    }
+}
+
+@Composable
+fun HomeRecommendVideoItem(modifier: Modifier, homeTypeBean: HomeTypeBean?) {
+    if (homeTypeBean == null) {
+        Box(modifier) {
+
+        }
+    } else {
+        Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(10.dp))
+            AsyncImage(model = homeTypeBean.thumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158/89F))
+            Spacer(Modifier.height(6.dp))
+            Text(homeTypeBean.homePageOperationCategoryName, fontSize = 12.sp)
+            Spacer(Modifier.height(5.dp))
         }
     }
 }
