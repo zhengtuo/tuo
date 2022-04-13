@@ -77,6 +77,24 @@ class DataRepository @Inject constructor(
         }, "getHomeFloorModule")
     }
 
+    suspend fun getTeacherList(page: Int, pageSize: Int, isStar: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getTeacherList(page, pageSize, isStar)
+        }, "getTeacherList")
+    }
+
+    suspend fun getGuessYouLikeList(page: Int, pageSize: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getGuessYouLikeList(page, pageSize)
+        }, "getGuessYouLikeList")
+    }
+
+    suspend fun getUnReadMessageNumber(): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUnreadMessageCount()
+        }, "getUnreadMessageCount")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)

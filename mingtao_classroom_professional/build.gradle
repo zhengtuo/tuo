@@ -75,10 +75,17 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     api 'androidx.activity:activity-compose:1.4.0'
     api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
+
+    //compose viewpager
     implementation "com.google.accompanist:accompanist-pager:0.24.3-alpha"
+    //指示器
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.3-alpha"
 
     //图片加载
     implementation "io.coil-kt:coil-compose:2.0.0-rc01"
+
+    //compose 约束布局
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
 
     debugApi "androidx.compose.ui:ui-tooling:$versions.compose_version"
 

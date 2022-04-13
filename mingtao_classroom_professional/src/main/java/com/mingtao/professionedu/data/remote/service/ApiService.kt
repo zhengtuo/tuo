@@ -53,4 +53,16 @@ interface ApiService {
     //首页课程楼层
     @GET("/floorModule/findList?locationType=1")
     suspend fun getHomeFloorModule(@Query("page") page: Int, @Query("limit") pageSize: Int): ApiResponse<BaseEntity<List<HomeFloorModuleBean>>>
+
+    //首页讲师列表
+    @GET("/teacher/findList")
+    suspend fun getTeacherList(@Query("page") page: Int, @Query("limit") PageSize: Int, @Query("isStar") isStar: Int): ApiResponse<BaseEntity<List<TeacherBean>>>
+
+    //首页猜你喜欢列表
+    @GET("/courseGoods/findList?like=1")
+    suspend fun getGuessYouLikeList(@Query("page") page: Int, @Query("limit") PageSize: Int): ApiResponse<BaseEntity<List<VideoInfoBean>>>
+
+    //未读消息数量
+    @GET("/pushLog/findUnreadCount")
+    suspend fun getUnreadMessageCount(): ApiResponse<BaseEntity<Int>>
 }

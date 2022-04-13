@@ -2,7 +2,10 @@ package com.mingtao.professionedu.ui.compose.main.view
 
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.ui.Modifier
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -30,9 +33,12 @@ class MTPCMainActivity : BaseMTPCActivity<MTPCMainVM>() {
                         mViewModel.selectedTab = it
                     })
                 }) {
-                    when (mViewModel.selectedTab) {
-                        0 -> HomePage()
+                    Box(Modifier.padding(it)) {
+                        when (mViewModel.selectedTab) {
+                            0 -> HomePage()
+                        }
                     }
+
                 }
             }
         }

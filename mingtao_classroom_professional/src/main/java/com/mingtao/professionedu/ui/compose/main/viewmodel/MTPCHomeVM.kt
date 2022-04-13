@@ -4,11 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.mingtao.professionedu.data.model.BannerBean
-import com.mingtao.professionedu.data.model.HomeArticleBean
-import com.mingtao.professionedu.data.model.HomeFloorModuleBean
-import com.mingtao.professionedu.data.model.HomeTypeBean
+import com.mingtao.professionedu.data.model.*
 import com.mingtao.professionedu.ui.compose.main.model.MTPCHomeModel
+import com.mingtao.professionedu.utils.MTPUtils
 import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.launch
 import com.zheng.base.viewmodel.BaseViewModel
@@ -38,6 +36,12 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
     //首页课程推荐
     var recommends = mutableStateOf(listOf<HomeFloorModuleBean>())
 
+    //首页讲师推荐
+    var teachers = mutableStateOf(listOf<TeacherBean>())
+
+    //猜你喜欢列表
+    var guessYouLikes = mutableStateOf(listOf<VideoInfoBean>())
+
     init {
         getData()
     }
@@ -48,6 +52,11 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
             LiveEventBus.get("handleData").post(Resource.Loading<Any>())
             withContext(Dispatchers.IO) {
                 val datas = ArrayList<Deferred<*>>()
+                if (MTPUtils.isLogin()) {
+                    datas.add(async {
+                        mModel.getUnReadMessageNumber()
+                    })
+                }
                 datas.add(async {
                     mModel.getHotSearchKeyword()
                 })
@@ -62,6 +71,12 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
                 })
                 datas.add(async {
                     mModel.getHomeFloorModule(1, 12)
+                })
+                datas.add(async {
+                    mModel.getTeacherList(1, 9, 2)
+                })
+                datas.add(async {
+                    mModel.getGuessYouLikeList(1, 20)
                 })
                 datas.forEach { it.await() }
                 withContext(Dispatchers.Main) {
@@ -78,7 +93,13 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
 
                                     "getArticleList" -> articles.value = resource.data as List<HomeArticleBean>
 
-                                    "getHomeFloorModule"-> recommends.value = resource.data as List<HomeFloorModuleBean>
+                                    "getHomeFloorModule" -> recommends.value = resource.data as List<HomeFloorModuleBean>
+
+                                    "getTeacherList" -> teachers.value = resource.data as List<TeacherBean>
+
+                                    "getGuessYouLikeList" -> guessYouLikes.value = resource.data as List<VideoInfoBean>
+
+                                    "getUnReadMessageNumber" -> messageSize = resource.data as Int
                                 }
                             } else {
                                 LiveEventBus.get("handleData").post(resource)

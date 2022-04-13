@@ -1,11 +1,16 @@
 package com.mingtao.professionedu.ui.compose.main.view
 
+import android.text.TextUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -14,28 +19,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.VerticalPager
-import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.*
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.data.model.CourseBean
-import com.mingtao.professionedu.data.model.HomeFloorModuleBean
-import com.mingtao.professionedu.data.model.HomeTypeBean
-import com.mingtao.professionedu.ui.compose.login.view.noClickable
+import com.mingtao.professionedu.data.model.*
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCHomeVM
-import com.mingtao.professionedu.ui.compose.theme.color_F7F7F7
-import com.mingtao.professionedu.ui.compose.theme.color_b
-import com.mingtao.professionedu.ui.compose.theme.color_e
-import com.mingtao.professionedu.ui.compose.theme.color_f
+import com.mingtao.professionedu.ui.compose.theme.*
 import com.zheng.comon.utils.DateUtils
 import kotlinx.coroutines.launch
 import java.util.*
@@ -49,7 +50,7 @@ fun HomePage(vm: MTPCHomeVM = viewModel()) {
     val rows = (vm.homeTypes.value.size + columnCount - 1) / columnCount
 
     //垂直排列元素
-    Column(Modifier.background(color_f).fillMaxSize()) {
+    Column(Modifier.background(color_f).fillMaxWidth()) {
         HomeTopSearch(vm)
         Spacer(Modifier.height(10.dp))
         LazyColumn {
@@ -79,6 +80,30 @@ fun HomePage(vm: MTPCHomeVM = viewModel()) {
                 }
             }
 
+            if (vm.teachers.value.isNotEmpty()) {
+                item {
+                    HomeTeachers(vm)
+                }
+            }
+
+            if (vm.guessYouLikes.value.isNotEmpty()) {
+                item {
+                    Row(Modifier.padding(start = 14.dp, top = 24.dp, end = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text("猜你喜欢", Modifier.weight(1F), fontSize = 17.sp)
+                        Text("没有喜欢的？点我选择意向课程", fontSize = 12.sp, color = color_b)
+                        Spacer(Modifier.width(5.dp))
+                        Image(painterResource(R.mipmap.mtp_home_item_more), modifier = Modifier.size(12.dp), contentDescription = null)
+                    }
+                }
+
+                items(vm.guessYouLikes.value.size) { index ->
+                    GuessYouLikeItem(vm.guessYouLikes.value[index])
+                }
+            }
+
+            item {
+                HomeBottom()
+            }
         }
     }
 }
@@ -124,7 +149,10 @@ fun HomeTopSearch(vm: MTPCHomeVM) {
         Spacer(Modifier.width(14.dp))
         Box(Modifier.align(Alignment.CenterVertically)) {
             Image(painterResource(R.mipmap.mtp_home_message), "搜索", Modifier.width(25.dp).height(29.dp).padding(5.dp))
-            Text(text = vm.messageSize.toString(), color = Color.White, fontSize = 7.sp, modifier = Modifier.background(Color.Red, CircleShape).size(10.dp).align(Alignment.TopEnd), textAlign = TextAlign.Center)
+            if (vm.messageSize>0) {
+                Text(text = vm.messageSize.toString(), color = Color.White, fontSize = 7.sp, modifier = Modifier.background(Color.Red, CircleShape).size(10.dp).align(Alignment.TopEnd), textAlign = TextAlign.Center)
+            }
+
         }
 
     }
@@ -158,10 +186,14 @@ fun HomeBanner(vm: MTPCHomeVM) {
             timer.cancel()
         }
     }
+    Box {
+        HorizontalPager(count = vm.bannerLists.value.size, state = pagerState, modifier = Modifier.padding(horizontal = 14.dp).clip(RoundedCornerShape(4.dp))) { index ->
+            AsyncImage(model = vm.bannerLists.value[index].bannerThumb, contentDescription = vm.bannerLists.value[index].bannerName, modifier = Modifier.fillMaxWidth().aspectRatio(331 / 106F), contentScale = ContentScale.Crop)
+        }
+        HorizontalPagerIndicator(pagerState = pagerState, indicatorWidth = 4.dp, activeColor = color_f, inactiveColor = color_b, modifier = Modifier.align(Alignment.BottomCenter).padding(12.dp))
 
-    HorizontalPager(count = vm.bannerLists.value.size, state = pagerState, modifier = Modifier.padding(horizontal = 14.dp).clip(RoundedCornerShape(4.dp))) { index ->
-        AsyncImage(model = vm.bannerLists.value[index].bannerThumb, contentDescription = vm.bannerLists.value[index].bannerName, modifier = Modifier.fillMaxWidth().aspectRatio(331 / 106F), contentScale = ContentScale.Crop)
     }
+
 }
 
 @Composable
@@ -216,7 +248,7 @@ fun HomeArticle(vm: MTPCHomeVM) {
 @Composable
 fun HomeRecommendItem(homeFloorModuleBean: HomeFloorModuleBean) {
     Column {
-        Row(Modifier.padding(start = 15.dp, top = 20.dp, bottom = 15.dp, end = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.padding(start = 14.dp, top = 24.dp, end = 14.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(homeFloorModuleBean.floorModuleName, Modifier.weight(1F), fontSize = 17.sp)
             Text(if (homeFloorModuleBean.jumpType == 1) "换一换" else "更多", fontSize = 12.sp, color = color_b)
             Spacer(Modifier.width(5.dp))
@@ -232,14 +264,30 @@ fun HomeRecommendItem(homeFloorModuleBean: HomeFloorModuleBean) {
 
         HorizontalPager(count = pageCount, state = pagerState) { index ->
             //Text(text = index.toString())
-            Row {
-                for (column in 0 until 4) {
-                    //itemIndex List数据位置
-                    val itemIndex = index * 4 + column
-                    HomeRecommendViewPageItem(Modifier.weight(1F), if (itemIndex > count) null else )
+            Column(Modifier.padding(horizontal = 14.dp)) {
+                for (column in 0 until 2) {
+                    Row {
+                        for (column2 in 0 until 2) {
+                            //itemIndex List数据位置
+                            val itemIndex = index * 4 + column * 2 + column2
+                            if (isCourse) {
+                                HomeRecommendCourseItem(Modifier.weight(1F), if (itemIndex >= count) null else homeFloorModuleBean.courseEntityList!![itemIndex])
+                            } else {
+                                HomeRecommendVideoItem(Modifier.weight(1F), if (itemIndex >= count) null else homeFloorModuleBean.courseGoodsEntityList!![itemIndex])
+                            }
+                            if (column2 == 0) {
+                                Spacer(Modifier.width(15.dp))
+                            }
+
+                        }
+                    }
                 }
+
             }
+
         }
+        Spacer(Modifier.height(10.dp))
+        HorizontalPagerBorderIndicator(pagerState = pagerState, indicatorWidth = 6.dp, activeColor = color_b, inactiveColor = color_f, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
@@ -252,27 +300,181 @@ fun HomeRecommendCourseItem(modifier: Modifier, courseBean: CourseBean?) {
     } else {
         Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(Modifier.height(10.dp))
-            AsyncImage(model = courseBean.thumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158/89F))
+            AsyncImage(model = courseBean.thumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158 / 89F).clip(RoundedCornerShape(5.dp)))
             Spacer(Modifier.height(6.dp))
-            Text(homeTypeBean.homePageOperationCategoryName, fontSize = 12.sp)
+            Text(courseBean.courseName, Modifier.fillMaxWidth(), fontSize = 11.sp, overflow = TextOverflow.Ellipsis, maxLines = 1)
+            Spacer(Modifier.height(8.dp))
+            Row {
+                Text(text = if (courseBean.isFree == 1) "免费" else getCourseShowPrice(courseBean.isPromote, courseBean.promoteTime ?: "", courseBean.shopPrice, courseBean.promotePrice), fontSize = 12.sp, color = color_F51818)
+                //Text 文字 中划线
+                Spacer(Modifier.width(3.dp))
+                Text(text = if (courseBean.isFree == 1) "" else "￥${courseBean.marketPrice}", Modifier.weight(1F).align(Alignment.Bottom), fontSize = 10.sp, textDecoration = TextDecoration.LineThrough, color = color_b)
+                Text(text = "${courseBean.picCount + courseBean.payCount}人学习", Modifier.align(Alignment.Bottom), fontSize = 10.sp, color = color_b)
+            }
             Spacer(Modifier.height(5.dp))
         }
     }
 }
 
 @Composable
-fun HomeRecommendVideoItem(modifier: Modifier, homeTypeBean: HomeTypeBean?) {
-    if (homeTypeBean == null) {
+fun HomeRecommendVideoItem(modifier: Modifier, videoInfoBean: VideoInfoBean?) {
+    if (videoInfoBean == null) {
         Box(modifier) {
 
         }
     } else {
         Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(Modifier.height(10.dp))
-            AsyncImage(model = homeTypeBean.thumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158/89F))
+            AsyncImage(model = videoInfoBean.goodsThumb, contentDescription = null, modifier = Modifier.fillMaxSize().aspectRatio(158 / 89F).clip(RoundedCornerShape(5.dp)), contentScale = ContentScale.Crop)
             Spacer(Modifier.height(6.dp))
-            Text(homeTypeBean.homePageOperationCategoryName, fontSize = 12.sp)
+            Text(videoInfoBean.goodsName, Modifier.fillMaxWidth(), fontSize = 13.sp, overflow = TextOverflow.Ellipsis, maxLines = 1)
+            Spacer(Modifier.height(8.dp))
+            Row {
+                Text(text = if (videoInfoBean.isFree == 1) "免费" else "￥${videoInfoBean.shopPrice}", fontSize = 12.sp, color = color_F51818)
+                //Text 文字 中划线
+                Spacer(Modifier.width(9.dp))
+                Text(text = if (videoInfoBean.isFree == 1) "" else "￥${videoInfoBean.marketPrice}", Modifier.weight(1F).align(Alignment.Bottom), fontSize = 11.sp, textDecoration = TextDecoration.LineThrough, color = color_b)
+                Text(text = "${videoInfoBean.clickCount}人学习", Modifier.align(Alignment.Bottom), fontSize = 11.sp, color = color_b)
+            }
             Spacer(Modifier.height(5.dp))
         }
     }
 }
+
+@ExperimentalPagerApi
+@Composable
+fun HomeTeachers(vm: MTPCHomeVM) {
+    Column {
+        Row(Modifier.padding(start = 14.dp, top = 24.dp, end = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("师资团队", Modifier.weight(1F), fontSize = 17.sp)
+            Text("更多", fontSize = 12.sp, color = color_b)
+            Spacer(Modifier.width(5.dp))
+            Image(painterResource(R.mipmap.mtp_home_item_more), modifier = Modifier.size(12.dp), contentDescription = null)
+        }
+
+        val pagerState = rememberPagerState(0)
+
+        val count = vm.teachers.value.size
+        val pageCount = (count + 3 - 1) / 3
+
+        Spacer(Modifier.height(10.dp))
+        HorizontalPager(count = pageCount, state = pagerState) { index ->
+            //Text(text = index.toString())
+            Column(Modifier.padding(horizontal = 14.dp)) {
+
+                Row {
+                    for (column in 0 until 3) {
+                        //itemIndex List数据位置
+                        val itemIndex = index * 3 + column
+                        HomeTeacherItem(Modifier.weight(1F), if (itemIndex > vm.teachers.value.size) null else vm.teachers.value[itemIndex])
+                        if (column != 2) {
+                            Spacer(Modifier.width(14.dp))
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+}
+
+@Composable
+fun GuessYouLikeItem(videoInfoBean: VideoInfoBean) {
+    Row(modifier = Modifier.padding(horizontal = 14.dp, vertical = 5.dp)) {
+        AsyncImage(model = videoInfoBean.goodsThumb, contentDescription = null, modifier = Modifier.size(122.dp, 69.dp).clip(RoundedCornerShape(5.dp)), contentScale = ContentScale.Crop)
+        Column(Modifier.padding(start = 10.dp).height(69.dp)) {
+            Text(videoInfoBean.goodsName, Modifier.fillMaxWidth(), fontSize = 13.sp)
+            Spacer(Modifier.height(6.dp))
+            Text(videoInfoBean.keywords, Modifier.fillMaxWidth(), fontSize = 11.sp, overflow = TextOverflow.Ellipsis, maxLines = 1, color = color_b)
+            Spacer(Modifier.weight(1F))
+            Row {
+                Text(text = if (videoInfoBean.isFree == 1) "免费" else "￥${videoInfoBean.shopPrice}", fontSize = 12.sp, color = color_F51818)
+                //Text 文字 中划线
+                Spacer(Modifier.width(9.dp))
+                Text(text = if (videoInfoBean.isFree == 1) "" else "￥${videoInfoBean.marketPrice}", Modifier.weight(1F).align(Alignment.Bottom), fontSize = 11.sp, textDecoration = TextDecoration.LineThrough, color = color_b)
+                Text(text = "${videoInfoBean.clickCount}人学习", Modifier.align(Alignment.Bottom), fontSize = 11.sp, color = color_b)
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeTeacherItem(modifier: Modifier, teacherBean: TeacherBean?) {
+    if (teacherBean == null) {
+        Box(modifier) {
+
+        }
+    } else {
+        Column(modifier.height(158.dp).background(color_F7F7F7, shape = RoundedCornerShape(5.dp)), horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(20.dp))
+            AsyncImage(model = teacherBean.teacherAvatar, contentDescription = null, modifier = Modifier.size(58.dp).clip(CircleShape), contentScale = ContentScale.Crop)
+            Spacer(Modifier.height(13.dp))
+            Text(teacherBean.teacherName, Modifier.fillMaxWidth(), fontSize = 13.sp, textAlign = TextAlign.Center)
+            Spacer(Modifier.height(6.dp))
+            Text(teacherBean.expert, Modifier.fillMaxWidth().padding(horizontal = 3.dp), fontSize = 11.sp, overflow = TextOverflow.Ellipsis, maxLines = 2, color = color_b, textAlign = TextAlign.Center)
+        }
+    }
+}
+
+@Composable
+fun HomeBottom() {
+    Text(text = "—已经到底了—", Modifier.fillMaxWidth().padding(vertical = 10.dp), fontSize = 12.sp, textAlign = TextAlign.Center, color = color_b)
+}
+
+fun getCourseShowPrice(isPromote: Int, endTime: String, shopPrice: Double, promotePrice: Double): String {
+    if (isPromote == 1) {
+        if (TextUtils.isEmpty(endTime)) {
+            return "￥$shopPrice"
+        }
+        if (DateUtils.utcToTimestamp(endTime) > Date().time) {
+            return "￥$promotePrice"
+        }
+    }
+    return "￥$shopPrice"
+}
+
+@ExperimentalPagerApi
+@Composable
+fun HorizontalPagerBorderIndicator(
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+    activeColor: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+    inactiveColor: Color = activeColor.copy(ContentAlpha.disabled),
+    indicatorWidth: Dp = 8.dp,
+    indicatorHeight: Dp = indicatorWidth,
+    spacing: Dp = indicatorWidth,
+    indicatorShape: Shape = CircleShape,
+
+) {
+
+    val indicatorWidthPx = LocalDensity.current.run {
+        indicatorWidth.roundToPx()
+    }
+    val spacingPx = LocalDensity.current.run {
+        spacing.roundToPx()
+    }
+
+    Box(modifier = modifier, contentAlignment = Alignment.CenterStart) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(spacing),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            val indicatorModifier = Modifier.size(width = indicatorWidth, height = indicatorHeight).background(color = inactiveColor, shape = indicatorShape).border(width = 0.5.dp,color = color_b, shape = indicatorShape)
+
+            repeat(pagerState.pageCount) {
+                Box(indicatorModifier)
+            }
+        }
+
+        Box(Modifier.offset {
+                val scrollPosition = (pagerState.currentPage + pagerState.currentPageOffset).coerceIn(0f, (pagerState.pageCount - 1).coerceAtLeast(0).toFloat())
+                IntOffset(x = ((spacingPx + indicatorWidthPx) * pagerState.currentPage).toInt(), y = 0
+                )
+            }.size(width = indicatorWidth, height = indicatorHeight).background(
+                color = activeColor,
+                shape = indicatorShape,
+            ))
+    }
+}
+

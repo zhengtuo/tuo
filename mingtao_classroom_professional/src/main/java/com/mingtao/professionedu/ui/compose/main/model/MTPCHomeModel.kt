@@ -29,4 +29,16 @@ class MTPCHomeModel @Inject constructor(private val dataRepository: DataReposito
     suspend fun getHomeFloorModule(page: Int, pageSize: Int): Resource<Any> {
         return dataRepository.getHomeFloorModule(page, pageSize)
     }
+
+    suspend fun getTeacherList(page: Int, pageSize: Int, isStar: Int): Resource<Any> {
+        return dataRepository.getTeacherList(page, pageSize, isStar)
+    }
+
+    suspend fun getGuessYouLikeList(page: Int, pageSize: Int): Resource<Any> {
+        return dataRepository.getGuessYouLikeList(page, pageSize)
+    }
+
+    suspend fun getUnReadMessageNumber(): Resource<Any> {
+        return dataRepository.getUnReadMessageNumber()
+    }
 }
