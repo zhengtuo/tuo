@@ -8,6 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.ui.Modifier
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.gyf.immersionbar.ImmersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mingtao.professionedu.base.activity.BaseMTPCActivity
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCMainVM
@@ -25,7 +26,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Route(path = RouterPath.MTP_PATH_MAIN)
 class MTPCMainActivity : BaseMTPCActivity<MTPCMainVM>() {
 
+
     override fun initialization() {
+        ImmersionBar.with(this).statusBarDarkFont(true).init()
         setContent {
             ComposeMTPTheme {
                 Scaffold(bottomBar = {
@@ -36,6 +39,7 @@ class MTPCMainActivity : BaseMTPCActivity<MTPCMainVM>() {
                     Box(Modifier.padding(it)) {
                         when (mViewModel.selectedTab) {
                             0 -> HomePage()
+                            1 -> StudyPage()
                         }
                     }
 

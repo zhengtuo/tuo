@@ -87,6 +87,9 @@ dependencies {
     //compose 约束布局
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
 
+    //compose 透明状态栏
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.3-alpha"
+
     debugApi "androidx.compose.ui:ui-tooling:$versions.compose_version"
 
     //放弃xml写drawable，试试DSL写法 https://github.com/forJrking/DrawableDsl

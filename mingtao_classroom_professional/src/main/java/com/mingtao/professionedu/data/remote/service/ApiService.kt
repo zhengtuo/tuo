@@ -65,4 +65,9 @@ interface ApiService {
     //未读消息数量
     @GET("/pushLog/findUnreadCount")
     suspend fun getUnreadMessageCount(): ApiResponse<BaseEntity<Int>>
+
+
+    //用户学习信息
+    @GET("/customer/studyInfo")
+    suspend fun getUserStudyInfo(): ApiResponse<BaseEntity<StudyInfoBean>>
 }

@@ -95,6 +95,12 @@ class DataRepository @Inject constructor(
         }, "getUnreadMessageCount")
     }
 
+    suspend fun getUserStudyInfo(): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUserStudyInfo()
+        }, "getUserStudyInfo")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)

@@ -56,4 +56,22 @@ object DateUtils {
     fun utcToTimestamp(dataTime: String): Long {
         return utcToDate(dataTime).time
     }
+
+    //60秒转  小时1分
+    fun secondToHoursMinute(second: Int): String {
+        if (second == 0) {
+            return "0分"
+        }
+        if (second <= 60) {
+            return "1分"
+        }
+        val minute: Int
+        val hours: Int = second / 3600
+        minute = (second - hours * 3600) / 60
+        return if (hours == 0) {
+            minute.toString() + "分"
+        } else {
+            hours.toString() + "小时" + minute + "分"
+        }
+    }
 }

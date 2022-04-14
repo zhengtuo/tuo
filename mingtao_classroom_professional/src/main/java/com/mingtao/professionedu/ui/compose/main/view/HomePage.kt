@@ -33,24 +33,32 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.google.accompanist.pager.*
+import com.gyf.immersionbar.ImmersionBar
 import com.mingtao.professionedu.R
 import com.mingtao.professionedu.data.model.*
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCHomeVM
 import com.mingtao.professionedu.ui.compose.theme.*
+import com.zheng.comon.utils.CommonUtils
 import com.zheng.comon.utils.DateUtils
 import kotlinx.coroutines.launch
 import java.util.*
 
 @ExperimentalPagerApi
 @Composable
-fun HomePage(vm: MTPCHomeVM = viewModel()) {
+fun HomePage(vm: MTPCHomeVM = viewModel(),) {
     //HomeType一行显示几列
     val columnCount = 5
     //计算有几行
     val rows = (vm.homeTypes.value.size + columnCount - 1) / columnCount
+    val statusBarHeight: Int = ImmersionBar.getStatusBarHeight(CommonUtils.context!!)
+    //转换状态栏高度为dp
+    val statusBarHeightDp = with(LocalDensity.current) {
+        statusBarHeight.toDp()
+    }
+
 
     //垂直排列元素
-    Column(Modifier.background(color_f).fillMaxWidth()) {
+    Column(Modifier.background(color_f).fillMaxWidth().padding(top = statusBarHeightDp)) {
         HomeTopSearch(vm)
         Spacer(Modifier.height(10.dp))
         LazyColumn {
@@ -149,7 +157,7 @@ fun HomeTopSearch(vm: MTPCHomeVM) {
         Spacer(Modifier.width(14.dp))
         Box(Modifier.align(Alignment.CenterVertically)) {
             Image(painterResource(R.mipmap.mtp_home_message), "搜索", Modifier.width(25.dp).height(29.dp).padding(5.dp))
-            if (vm.messageSize>0) {
+            if (vm.messageSize > 0) {
                 Text(text = vm.messageSize.toString(), color = Color.White, fontSize = 7.sp, modifier = Modifier.background(Color.Red, CircleShape).size(10.dp).align(Alignment.TopEnd), textAlign = TextAlign.Center)
             }
 
@@ -287,7 +295,7 @@ fun HomeRecommendItem(homeFloorModuleBean: HomeFloorModuleBean) {
 
         }
         Spacer(Modifier.height(10.dp))
-        HorizontalPagerBorderIndicator(pagerState = pagerState, indicatorWidth = 6.dp, activeColor = color_b, inactiveColor = color_f, modifier = Modifier.align(Alignment.CenterHorizontally))
+        HorizontalPagerBorderIndicator(pagerState = pagerState, indicatorWidth = 7.dp, activeColor = color_b, inactiveColor = color_f, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
@@ -372,10 +380,10 @@ fun HomeTeachers(vm: MTPCHomeVM) {
                         }
                     }
                 }
-
             }
-
         }
+        Spacer(Modifier.height(10.dp))
+        HorizontalPagerBorderIndicator(pagerState = pagerState, indicatorWidth = 7.dp, activeColor = color_b, inactiveColor = color_f, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
@@ -446,7 +454,7 @@ fun HorizontalPagerBorderIndicator(
     spacing: Dp = indicatorWidth,
     indicatorShape: Shape = CircleShape,
 
-) {
+    ) {
 
     val indicatorWidthPx = LocalDensity.current.run {
         indicatorWidth.roundToPx()
@@ -460,7 +468,7 @@ fun HorizontalPagerBorderIndicator(
             horizontalArrangement = Arrangement.spacedBy(spacing),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            val indicatorModifier = Modifier.size(width = indicatorWidth, height = indicatorHeight).background(color = inactiveColor, shape = indicatorShape).border(width = 0.5.dp,color = color_b, shape = indicatorShape)
+            val indicatorModifier = Modifier.size(width = indicatorWidth, height = indicatorHeight).background(color = inactiveColor, shape = indicatorShape).border(width = 0.5.dp, color = color_b, shape = indicatorShape)
 
             repeat(pagerState.pageCount) {
                 Box(indicatorModifier)
@@ -468,13 +476,12 @@ fun HorizontalPagerBorderIndicator(
         }
 
         Box(Modifier.offset {
-                val scrollPosition = (pagerState.currentPage + pagerState.currentPageOffset).coerceIn(0f, (pagerState.pageCount - 1).coerceAtLeast(0).toFloat())
-                IntOffset(x = ((spacingPx + indicatorWidthPx) * pagerState.currentPage).toInt(), y = 0
-                )
-            }.size(width = indicatorWidth, height = indicatorHeight).background(
-                color = activeColor,
-                shape = indicatorShape,
-            ))
+            val scrollPosition = (pagerState.currentPage + pagerState.currentPageOffset).coerceIn(0f, (pagerState.pageCount - 1).coerceAtLeast(0).toFloat())
+            IntOffset(x = ((spacingPx + indicatorWidthPx) * pagerState.currentPage).toInt(), y = 0)
+        }.size(width = indicatorWidth, height = indicatorHeight).background(
+            color = activeColor,
+            shape = indicatorShape,
+        ))
     }
 }
 
