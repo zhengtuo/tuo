@@ -14,4 +14,5 @@ class StudyInfoBean {
     var examinationAll: Int = 0
     var playTimeToday = 0
     var examinationToday = 0
+    var playTimeAll = 0
 }
