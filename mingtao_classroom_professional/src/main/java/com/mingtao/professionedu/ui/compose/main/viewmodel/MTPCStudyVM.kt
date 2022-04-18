@@ -21,8 +21,14 @@ class MTPCStudyVM @Inject constructor(private val mModel: MTPCStudyModel) : Base
     //是否登录
     var isLogin by mutableStateOf(false)
 
-    //未读消息数量
+    //登录信息
     var studyInfoBean by mutableStateOf(StudyInfoBean())
+
+    //学习页 分类数据
+    val categories by mutableStateOf(listOf("课程、题库、资料"))
+
+    //当前分类index
+    var categoryIndex by mutableStateOf(0)
 
 
     init {

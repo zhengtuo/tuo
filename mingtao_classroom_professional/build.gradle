@@ -72,8 +72,8 @@ dependencies {
     api "androidx.compose.ui:ui:$versions.compose_version"
     api "androidx.compose.material:material:$versions.compose_version"
     api "androidx.compose.ui:ui-tooling-preview:$versions.compose_version"
-    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     api 'androidx.activity:activity-compose:1.4.0'
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
 
     //compose viewpager

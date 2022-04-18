@@ -6,6 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.gyf.immersionbar.ImmersionBar
 import com.mingtao.professionedu.R
+import com.mingtao.professionedu.ui.compose.login.view.noClickable
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCStudyVM
 import com.mingtao.professionedu.ui.compose.theme.*
 import com.zheng.comon.utils.CommonUtils
@@ -97,7 +101,29 @@ fun StudyPage(vm: MTPCStudyVM = viewModel()) {
                 StudyIconItem(Modifier.weight(1F), "错题本", R.mipmap.mtp_question_bank_error)
                 StudyIconItem(Modifier.weight(1F), "试题收藏", R.mipmap.mtp_question_bank_collection)
             }
-            Box(Modifier.background(color_F7F7F7).height(5.dp).fillMaxWidth()) {
+            Box(Modifier.background(color_F7F7F7).height(5.dp).fillMaxWidth())
+            TabRow(
+                vm.categoryIndex, Modifier.height(50.dp).fillMaxWidth(0.4F), backgroundColor = Color.White,
+                indicator = { positions ->//设置滑动条的属性，默认是白色的
+                    TabRowDefaults.Indicator(Modifier.tabIndicatorOffset(positions[vm.categoryIndex]), color = Color.Red)
+                },
+            ) {
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.noClickable {
+                    vm.categoryIndex = 0
+                }) {
+                    Text("课程", fontSize = if (vm.categoryIndex == 0) 14.sp else 12.sp, color = Color.Black)
+                }
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.noClickable {
+                    vm.categoryIndex = 1
+                }) {
+                    Text("题库", fontSize = if (vm.categoryIndex == 1) 14.sp else 12.sp, color = Color.Black)
+                }
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.noClickable {
+                    vm.categoryIndex = 2
+                }) {
+                    Text("资料", fontSize = if (vm.categoryIndex == 2) 14.sp else 12.sp, color = Color.Black)
+                }
+
 
             }
         }
