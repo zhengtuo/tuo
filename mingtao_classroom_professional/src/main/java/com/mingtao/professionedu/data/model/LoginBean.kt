@@ -8,5 +8,5 @@ class LoginBean {
 
     var loginName: String = ""
 
-    var intentionCourseId: String = ""
+    var intentionCourseId: String? = ""
 }

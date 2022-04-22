@@ -1,5 +1,6 @@
 package com.mingtao.professionedu.data.model
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -24,4 +25,10 @@ class VideoInfoBean {
 
     //简介
     var keywords: String = ""
+
+    //视频总时长
+    var catLength: Int? = 0
+
+    @Json(name = "courseGoodsLearnLogEntity")
+    var videoLearnRecordBean: VideoLearnRecordBean? = null
 }

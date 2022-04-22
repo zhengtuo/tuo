@@ -62,7 +62,7 @@ class MTPCLoginActivity : BaseMTPCActivity<MTPCLoginVM>() {
                         SharedPreferencesUtils.saveInt("loginType", 1)
                         SharedPreferencesUtils.saveString("token", data.rememberToken)
 
-                        if (data.intentionCourseId == "") {
+                        if (data.intentionCourseId == null || data.intentionCourseId == "") {
 
                         } else {
                             //前往首页

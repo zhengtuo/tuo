@@ -70,4 +70,20 @@ interface ApiService {
     //用户学习信息
     @GET("/customer/studyInfo")
     suspend fun getUserStudyInfo(): ApiResponse<BaseEntity<StudyInfoBean>>
+
+    //获取用户购买课程
+    @GET("/customerCourse/findList")
+    suspend fun getUserCourse(@Query("withCatalog") withCatalog: Int, @Query("withLearnInfo") withLearnInfo: Int): ApiResponse<BaseEntity<List<UserCourseBean>>>
+
+    //获取用户购买视频
+    @GET("/customerCourseGoods/findList?withLearnInfo=1")
+    suspend fun getUserVideo(@Query("page") page: Int, @Query("limit") pageSize: Int): ApiResponse<BaseEntity<List<VideoInfoBean>>>
+
+    //获取用户拥有题库的课程
+    @GET("/customerExamination/findExaminationCourse")
+    suspend fun getUserBuyCourseQuestion(): ApiResponse<BaseEntity<List<CourseBean>>>
+
+    //获取已购买课程试卷列表
+    @GET("/customerExamination/findList")
+    suspend fun getUserBuyCourseTopics(@Query("courseId") courseId:Int): ApiResponse<BaseEntity<List<TopicBean>>>
 }

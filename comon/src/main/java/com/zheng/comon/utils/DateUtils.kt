@@ -74,4 +74,18 @@ object DateUtils {
             hours.toString() + "小时" + minute + "分"
         }
     }
+
+    //转换播放时间  秒转几分几秒
+    fun changeVideoTime(time: Int): String {
+        if (time == 0) {
+            return ""
+        }
+        val minute: Int = time / 60
+        val second: Int = time % 60
+        return if (second == 0) {
+            minute.toString() + "分"
+        } else {
+            minute.toString() + "分" + second + "秒"
+        }
+    }
 }

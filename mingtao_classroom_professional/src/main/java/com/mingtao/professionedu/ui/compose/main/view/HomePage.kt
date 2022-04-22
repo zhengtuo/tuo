@@ -230,6 +230,7 @@ fun HomeArticle(vm: MTPCHomeVM) {
                 Column {
                     if (vm.articles.value.isNotEmpty()) {
                         Row {
+                            //...
                             Text(vm.articles.value[0].title, Modifier.weight(1F), maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 12.sp)
                             Spacer(Modifier.width(20.dp))
                             Text(text = if (DateUtils.isTimeToday(DateUtils.utcToTimestamp(vm.articles.value[0].createTime))) DateUtils.utcToHM(vm.articles.value[0].createTime) else DateUtils.utcToTime(vm.articles.value[0].createTime, "MM月dd日"), fontSize = 12.sp)
@@ -313,11 +314,11 @@ fun HomeRecommendCourseItem(modifier: Modifier, courseBean: CourseBean?) {
             Text(courseBean.courseName, Modifier.fillMaxWidth(), fontSize = 11.sp, overflow = TextOverflow.Ellipsis, maxLines = 1)
             Spacer(Modifier.height(8.dp))
             Row {
-                Text(text = if (courseBean.isFree == 1) "免费" else getCourseShowPrice(courseBean.isPromote, courseBean.promoteTime ?: "", courseBean.shopPrice, courseBean.promotePrice), fontSize = 12.sp, color = color_F51818)
+                Text(text = if (courseBean.isFree == 1) "免费" else getCourseShowPrice(courseBean.isPromote?:0, courseBean.promoteTime ?: "", courseBean.shopPrice?:0.0, courseBean.promotePrice?:0.0), fontSize = 12.sp, color = color_F51818)
                 //Text 文字 中划线
                 Spacer(Modifier.width(3.dp))
                 Text(text = if (courseBean.isFree == 1) "" else "￥${courseBean.marketPrice}", Modifier.weight(1F).align(Alignment.Bottom), fontSize = 10.sp, textDecoration = TextDecoration.LineThrough, color = color_b)
-                Text(text = "${courseBean.picCount + courseBean.payCount}人学习", Modifier.align(Alignment.Bottom), fontSize = 10.sp, color = color_b)
+                Text(text = "${courseBean.picCount?:0 + courseBean.payCount!!}人学习", Modifier.align(Alignment.Bottom), fontSize = 10.sp, color = color_b)
             }
             Spacer(Modifier.height(5.dp))
         }
@@ -369,7 +370,6 @@ fun HomeTeachers(vm: MTPCHomeVM) {
         HorizontalPager(count = pageCount, state = pagerState) { index ->
             //Text(text = index.toString())
             Column(Modifier.padding(horizontal = 14.dp)) {
-
                 Row {
                     for (column in 0 until 3) {
                         //itemIndex List数据位置

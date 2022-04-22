@@ -101,6 +101,30 @@ class DataRepository @Inject constructor(
         }, "getUserStudyInfo")
     }
 
+    suspend fun getUserCourse(withCatalog: Int, withLearnInfo: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUserCourse(withCatalog, withLearnInfo)
+        }, "getUserCourse")
+    }
+
+    suspend fun getUserVideo(page: Int, pageSize: Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUserVideo(page, pageSize)
+        }, "getUserVideo")
+    }
+
+    suspend fun getUserQuestion(): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUserBuyCourseQuestion()
+        }, "getUserQuestion")
+    }
+
+    suspend fun getUserBuyCourseTopics(courseId:Int): Resource<Any> {
+        return processCallByApi({
+            dataGenerator.getRetrofitService(ApiService::class.java).getUserBuyCourseTopics(courseId)
+        }, "getUserBuyCourseTopics")
+    }
+
 
     private suspend fun processCallByApi(responseCall: suspend () -> ApiResponse<BaseEntity<*>>, methodName: String): Resource<Any> {
         var result: Resource<Any> = Resource.DataError(errorCode = UN_KNOW, null)
@@ -110,7 +134,7 @@ class DataRepository @Inject constructor(
         val response = responseCall.invoke()
         response.suspendOnSuccess {
             result = if (data.code == 0) {
-                Resource.Success(data = data.data, methodName = methodName)
+                Resource.Success(data = data.data, methodName = methodName, timestamp = data.timestamp)
             } else {
                 Resource.DataError(errorCode = HAVE_MESSAGE, errorCase = data.msg)
             }

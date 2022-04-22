@@ -5,11 +5,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.mingtao.professionedu.ui.compose.login.model.MTPCPasswordLoginModel
+import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.BaseUtils
 import com.zheng.base.utils.launch
 import com.zheng.base.viewmodel.BaseViewModel
+import com.zheng.comon.utils.MD5Utils
 import com.zheng.comon.utils.SharedPreferencesUtils
-import com.zheng.base.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -56,7 +57,7 @@ class MTPCPasswordLoginVM @Inject constructor(private val mModel: MTPCPasswordLo
         launch({
             dataLiveData.postValue(Resource.Loading())
             dataLiveData.postValue(withContext(Dispatchers.IO) {
-                mModel.passwordLogin(phoneNumber, password, "android", 0)
+                mModel.passwordLogin(phoneNumber, MD5Utils.md5(password), "android", 0)
             })
         })
     }
