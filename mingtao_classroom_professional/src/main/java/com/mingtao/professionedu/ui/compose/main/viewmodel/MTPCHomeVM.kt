@@ -49,33 +49,34 @@ class MTPCHomeVM @Inject constructor(private val mModel: MTPCHomeModel) : BaseVi
     @ExperimentalCoroutinesApi
     fun getData() {
         launch({
+            val supervisor = CoroutineScope(SupervisorJob())
             LiveEventBus.get("handleData").post(Resource.Loading<Any>())
             withContext(Dispatchers.IO) {
                 val datas = ArrayList<Deferred<*>>()
                 if (MTPUtils.isLogin()) {
-                    datas.add(async {
+                    datas.add(supervisor.async {
                         mModel.getUnReadMessageNumber()
                     })
                 }
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getHotSearchKeyword()
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getBannerList("app_home")
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getHomeType()
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getArticleList(1, 2)
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getHomeFloorModule(1, 12)
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getTeacherList(1, 9, 2)
                 })
-                datas.add(async {
+                datas.add(supervisor.async {
                     mModel.getGuessYouLikeList(1, 20)
                 })
                 datas.forEach { it.await() }

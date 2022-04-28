@@ -75,10 +75,8 @@ class CoroutineActivity : AppCompatActivity() {
         return "initCoroutine2"
     }
 
-
     fun setContent(content: TextView, value: String) {
         content.text = value
     }
-
 
 }

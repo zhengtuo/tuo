@@ -17,6 +17,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -38,10 +39,13 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.gyf.immersionbar.ImmersionBar
 import com.mingtao.professionedu.R
+import com.mingtao.professionedu.data.model.StudyQuestionType
 import com.mingtao.professionedu.data.model.UserCourseBean
 import com.mingtao.professionedu.data.model.VideoInfoBean
 import com.mingtao.professionedu.data.model.VideoLearnRecordBean
 import com.mingtao.professionedu.ui.compose.login.view.noClickable
+import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCStudyQuestionItemVM
+import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCStudyQuestionVM
 import com.mingtao.professionedu.ui.compose.main.viewmodel.MTPCStudyVM
 import com.mingtao.professionedu.ui.compose.theme.*
 import com.zheng.base.utils.launch
@@ -154,11 +158,12 @@ fun StudyPage(vm: MTPCStudyVM = viewModel()) {
                     1 -> {
                         item {
                             //题库
-                            QuestionPage(vm)
+                            QuestionPage()
                         }
                     }
                     2 -> {
                         //资料
+
                     }
                 }
             }
@@ -311,7 +316,7 @@ fun CoursePage(vm: MTPCStudyVM) {
 
 @Composable
 @ExperimentalPagerApi
-fun QuestionPage(vm: MTPCStudyVM) {
+fun QuestionPage(vm: MTPCStudyQuestionVM = viewModel()) {
     Spacer(Modifier.height(10.dp))
     Row(Modifier.padding(horizontal = 7.dp)) {
         vm.userQuestions.forEachIndexed { index, courseBean ->
@@ -323,19 +328,36 @@ fun QuestionPage(vm: MTPCStudyVM) {
     }
     if (vm.userQuestions.isNotEmpty()) {
         HorizontalPager(vm.userQuestions.size) { index->
-
-
+            QuestionItemPage(vm.userQuestions[index].courseId)
         }
-        vm.getUserBuyCourseTopics()
     }
-    vm.studyQuestionTypes.forEach {
-        Column() {
-            Row() {
+}
 
+@Composable
+@ExperimentalPagerApi
+fun QuestionItemPage(courseId:Int,vm: MTPCStudyQuestionItemVM = viewModel()) {
+    vm.getUserBuyCourseTopics(courseId)
+    Column() {
+        vm.studyQuestionTypes.forEach {
+            Column() {
+                Row(Modifier.padding(start = 15.dp,top=20.dp, bottom = 20.dp, end = 23.dp)) {
+                    Image(painterResource(it.resId), contentDescription = null, Modifier.size(24.dp,30.dp))
+                    Spacer(Modifier.width(20.dp))
+                    Column(Modifier.weight(1F)) {
+                        Text(it.name, fontSize = 13.sp)
+                        Text(it.topicBeans.size.toString(), fontSize = 12.sp)
+                    }
+                    Image(painterResource(if (it.fold) R.mipmap.mtp_arrow_down else R.mipmap.mtp_arrow_up), contentDescription = null,Modifier.size(13.dp).align(Alignment.CenterVertically).noClickable {
+                        val data = vm.studyQuestionTypes
+                       data[0].fold = false
+                        vm.studyQuestionTypes= listOf()
+                        vm.studyQuestionTypes = data
+                    })
+                }
             }
-
         }
     }
+
 }
 
 //处理有效性显示

@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 class CourseBean {
-
+    var courseId:Int = 0
     var courseName: String = ""
     var thumb: String = ""
 

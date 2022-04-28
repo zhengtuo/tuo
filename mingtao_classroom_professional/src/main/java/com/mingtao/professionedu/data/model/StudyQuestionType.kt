@@ -1,3 +1,3 @@
 package com.mingtao.professionedu.data.model
 
-data class StudyQuestionType(var name: String, var resId: Int,var fold:Boolean)
+data class StudyQuestionType(var name: String, var resId: Int,var fold:Boolean,var topicBeans:MutableList<TopicBean>)
