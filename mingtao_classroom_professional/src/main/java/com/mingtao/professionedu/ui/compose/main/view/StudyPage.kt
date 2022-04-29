@@ -9,6 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,7 +19,6 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -37,9 +38,10 @@ import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.gyf.immersionbar.ImmersionBar
 import com.mingtao.professionedu.R
-import com.mingtao.professionedu.data.model.StudyQuestionType
 import com.mingtao.professionedu.data.model.UserCourseBean
 import com.mingtao.professionedu.data.model.VideoInfoBean
 import com.mingtao.professionedu.data.model.VideoLearnRecordBean
@@ -71,7 +73,9 @@ fun StudyPage(vm: MTPCStudyVM = viewModel()) {
         Column(Modifier.fillMaxWidth().padding(top = statusBarHeightDp + 13.dp)) {
             Text(text = "学习中心", Modifier.align(Alignment.CenterHorizontally), fontSize = 16.sp, color = Color.White)
             Spacer(Modifier.height(13.dp))
-            LazyColumn {
+            val listState = rememberLazyListState()
+            listState.interactionSource
+            LazyColumn(state = listState) {
                 item {
                     Card(Modifier.padding(horizontal = 14.dp)) {
                         Column {
@@ -158,7 +162,7 @@ fun StudyPage(vm: MTPCStudyVM = viewModel()) {
                     1 -> {
                         item {
                             //题库
-                            QuestionPage()
+                            QuestionPage(listState)
                         }
                     }
                     2 -> {
@@ -305,52 +309,64 @@ fun CoursePage(vm: MTPCStudyVM) {
                         }
                         HomeBottom()
                     }
+                }
+            }
+        }
+    }
+}
 
+@Composable
+@ExperimentalPagerApi
+fun QuestionPage(state: LazyListState,vm: MTPCStudyQuestionVM = viewModel()) {
+
+    Column() {
+        Spacer(Modifier.height(10.dp))
+        Row(Modifier.padding(horizontal = 7.dp)) {
+            vm.userQuestions.forEachIndexed { index, courseBean ->
+                val isSelect = index == vm.questionIndex
+                Box(Modifier.background(if (isSelect) Color.White else color_E0E0E0).border(width = 0.5.dp, color = if (isSelect) color_47A3FF else Color.Transparent, shape = CircleShape).padding(horizontal = 14.dp, vertical = 5.dp)) {
+                    Text(courseBean.courseName, fontSize = 12.sp, color = if (isSelect) color_47A3FF else color_2)
+                }
+            }
+        }
+        SwipeRefresh(state = rememberSwipeRefreshState(vm.refreshing), onRefresh = {
+            vm.getData()
+        }, swipeEnabled = state.firstVisibleItemScrollOffset==0) {
+            LazyColumn(Modifier.height(300.dp)) {
+                item {
+                    if (vm.userQuestions.isNotEmpty()) {
+                        HorizontalPager(vm.userQuestions.size) { index ->
+                            QuestionItemPage(vm.userQuestions[index].courseId)
+                        }
+                    }
                 }
 
-
             }
         }
+
+
     }
+
 }
 
 @Composable
 @ExperimentalPagerApi
-fun QuestionPage(vm: MTPCStudyQuestionVM = viewModel()) {
-    Spacer(Modifier.height(10.dp))
-    Row(Modifier.padding(horizontal = 7.dp)) {
-        vm.userQuestions.forEachIndexed { index, courseBean ->
-            val isSelect = index == vm.questionIndex
-            Box(Modifier.background(if (isSelect) Color.White else color_E0E0E0).border(width = 0.5.dp, color = if (isSelect) color_47A3FF else Color.Transparent, shape = CircleShape).padding(horizontal = 14.dp, vertical = 5.dp)) {
-                Text(courseBean.courseName, fontSize = 12.sp, color = if (isSelect) color_47A3FF else color_2)
-            }
-        }
-    }
-    if (vm.userQuestions.isNotEmpty()) {
-        HorizontalPager(vm.userQuestions.size) { index->
-            QuestionItemPage(vm.userQuestions[index].courseId)
-        }
-    }
-}
-
-@Composable
-@ExperimentalPagerApi
-fun QuestionItemPage(courseId:Int,vm: MTPCStudyQuestionItemVM = viewModel()) {
+fun QuestionItemPage(courseId: Int, vm: MTPCStudyQuestionItemVM = viewModel()) {
     vm.getUserBuyCourseTopics(courseId)
     Column() {
-        vm.studyQuestionTypes.forEach {
+        vm.studyQuestionTypes.forEachIndexed { index, it ->
             Column() {
-                Row(Modifier.padding(start = 15.dp,top=20.dp, bottom = 20.dp, end = 23.dp)) {
-                    Image(painterResource(it.resId), contentDescription = null, Modifier.size(24.dp,30.dp))
+                Row(Modifier.padding(start = 15.dp, top = 20.dp, bottom = 20.dp, end = 23.dp)) {
+                    Image(painterResource(it.resId), contentDescription = null, Modifier.size(24.dp, 30.dp))
                     Spacer(Modifier.width(20.dp))
                     Column(Modifier.weight(1F)) {
                         Text(it.name, fontSize = 13.sp)
                         Text(it.topicBeans.size.toString(), fontSize = 12.sp)
                     }
-                    Image(painterResource(if (it.fold) R.mipmap.mtp_arrow_down else R.mipmap.mtp_arrow_up), contentDescription = null,Modifier.size(13.dp).align(Alignment.CenterVertically).noClickable {
+                    Image(painterResource(if (it.fold) R.mipmap.mtp_arrow_down else R.mipmap.mtp_arrow_up), contentDescription = null, Modifier.size(13.dp).align(Alignment.CenterVertically).noClickable {
                         val data = vm.studyQuestionTypes
-                       data[0].fold = false
-                        vm.studyQuestionTypes= listOf()
+                        data[index].fold = !data[index].fold
+                        vm.studyQuestionTypes = listOf()
                         vm.studyQuestionTypes = data
                     })
                 }

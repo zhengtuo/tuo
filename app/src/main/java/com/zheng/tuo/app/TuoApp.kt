@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zheng.base.delegate.ApplicationDelegate
-import com.zheng.lib.base.delegate.ApplicationDelegate
-import com.zheng.lib.utils.LibUtils
 import com.zheng.tuo.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 
@@ -34,7 +32,7 @@ open class TuoApp : Application() {
      * 初始化app相关
      */
     private fun initApp() {
-        LibUtils.context = this
+        //LibUtils.context = this
         //LibUtils.setNetConstants(NetConfig().setBaseUrl("http://php.mingtaoedu.com/mt/public/index.php/").setInterceptor(HeadInterceptor()))
 
         initARouter()

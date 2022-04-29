@@ -2,9 +2,12 @@ package com.mingtao.professionedu.ui.compose.main.view
 
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -20,6 +23,7 @@ import com.zheng.lib.data.error.Error
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalFoundationApi
 @ExperimentalCoroutinesApi
 @ExperimentalPagerApi
 @AndroidEntryPoint
@@ -31,19 +35,25 @@ class MTPCMainActivity : BaseMTPCActivity<MTPCMainVM>() {
         ImmersionBar.with(this).statusBarDarkFont(true).init()
         setContent {
             ComposeMTPTheme {
-                Scaffold(bottomBar = {
-                    BottomTab(selected = mViewModel.selectedTab, onSelectedChanged = {
-                        mViewModel.selectedTab = it
-                    })
-                }) {
-                    Box(Modifier.padding(it)) {
-                        when (mViewModel.selectedTab) {
-                            0 -> HomePage()
-                            1 -> StudyPage()
+                //去掉滑动阴影
+                CompositionLocalProvider(
+                    LocalOverScrollConfiguration provides null,
+                ) {
+                    Scaffold(bottomBar = {
+                        BottomTab(selected = mViewModel.selectedTab, onSelectedChanged = {
+                            mViewModel.selectedTab = it
+                        })
+                    }) {
+                        Box(Modifier.padding(it)) {
+                            when (mViewModel.selectedTab) {
+                                0 -> HomePage()
+                                1 -> StudyPage()
+                            }
                         }
-                    }
 
+                    }
                 }
+
             }
         }
     }

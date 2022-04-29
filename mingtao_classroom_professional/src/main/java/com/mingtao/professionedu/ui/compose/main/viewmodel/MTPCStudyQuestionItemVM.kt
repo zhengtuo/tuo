@@ -31,6 +31,9 @@ class MTPCStudyQuestionItemVM @Inject constructor(private val mModel: MTPCStudyM
     ))
 
     fun getUserBuyCourseTopics(courseId: Int) {
+        if (topicBeans.isNotEmpty()) {
+            return
+        }
         launch({
                 val result = withContext(Dispatchers.IO) { mModel.getUserBuyCourseTopics(courseId) }
                 withContext(Dispatchers.Main) {

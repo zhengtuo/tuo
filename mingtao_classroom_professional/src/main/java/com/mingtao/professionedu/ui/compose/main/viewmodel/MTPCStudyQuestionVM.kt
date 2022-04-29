@@ -21,7 +21,7 @@ class MTPCStudyQuestionVM @Inject constructor(private val mModel: MTPCStudyModel
 
     //题库选中index
     var questionIndex by mutableStateOf(0)
-
+    //是否正在刷新
     var refreshing by mutableStateOf(false)
 
     //已购买有题库的课程
@@ -41,7 +41,7 @@ class MTPCStudyQuestionVM @Inject constructor(private val mModel: MTPCStudyModel
     @ExperimentalCoroutinesApi
     fun getData() {
         launch({
-            LiveEventBus.get("handleData").post(Resource.Loading<Any>())
+            refreshing = true
             withContext(Dispatchers.IO) {
                 val datas = ArrayList<Deferred<*>>()
 
@@ -65,7 +65,7 @@ class MTPCStudyQuestionVM @Inject constructor(private val mModel: MTPCStudyModel
                             }
                         }
                     }
-                    LiveEventBus.get("handleData").post(Resource.Complete<Any>())
+                    refreshing = false
                 }
             }
         }, {
