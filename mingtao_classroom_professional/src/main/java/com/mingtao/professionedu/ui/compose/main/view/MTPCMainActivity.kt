@@ -30,7 +30,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Route(path = RouterPath.MTP_PATH_MAIN)
 class MTPCMainActivity : BaseMTPCActivity<MTPCMainVM>() {
 
-
     override fun initialization() {
         ImmersionBar.with(this).statusBarDarkFont(true).init()
         setContent {

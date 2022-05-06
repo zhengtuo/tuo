@@ -4,9 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.mingtao.professionedu.R
 import com.mingtao.professionedu.data.model.CourseBean
-import com.mingtao.professionedu.data.model.StudyQuestionType
 import com.mingtao.professionedu.ui.compose.main.model.MTPCStudyModel
 import com.zheng.base.data.model.Resource
 import com.zheng.base.utils.launch
@@ -26,13 +24,6 @@ class MTPCStudyQuestionVM @Inject constructor(private val mModel: MTPCStudyModel
 
     //已购买有题库的课程
     var userQuestions by mutableStateOf(listOf<CourseBean>())
-
-    var studyQuestionTypes by mutableStateOf(listOf(
-        StudyQuestionType("历年真题", R.mipmap.mtp_question_real, true, mutableListOf()),
-        StudyQuestionType("模拟演练", R.mipmap.mtp_question_imitate, true,mutableListOf()),
-        StudyQuestionType("密题卷", R.mipmap.mtp_question_secret, true,mutableListOf()),
-        StudyQuestionType("章节测试", R.mipmap.mtp_question_chapter, true,mutableListOf()),
-    ))
 
     init {
         getData()

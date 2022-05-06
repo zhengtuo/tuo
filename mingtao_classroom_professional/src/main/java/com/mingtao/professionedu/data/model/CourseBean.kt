@@ -15,7 +15,7 @@ class CourseBean {
     var shopPrice:Double? = 0.0
     var promotePrice:Double? = 0.0
     var marketPrice:Double? = 0.0
-//
+    //
     var payCount:Int? = 0
     var picCount:Int? = 0
     var classCount:Int? = 0

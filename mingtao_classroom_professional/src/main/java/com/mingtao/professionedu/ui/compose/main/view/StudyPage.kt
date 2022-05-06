@@ -1,6 +1,7 @@
 package com.mingtao.professionedu.ui.compose.main.view
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -31,6 +32,7 @@ import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -317,7 +319,7 @@ fun CoursePage(vm: MTPCStudyVM) {
 
 @Composable
 @ExperimentalPagerApi
-fun QuestionPage(state: LazyListState,vm: MTPCStudyQuestionVM = viewModel()) {
+fun QuestionPage(state: LazyListState, vm: MTPCStudyQuestionVM = viewModel()) {
 
     Column() {
         Spacer(Modifier.height(10.dp))
@@ -331,7 +333,7 @@ fun QuestionPage(state: LazyListState,vm: MTPCStudyQuestionVM = viewModel()) {
         }
         SwipeRefresh(state = rememberSwipeRefreshState(vm.refreshing), onRefresh = {
             vm.getData()
-        }, swipeEnabled = state.firstVisibleItemScrollOffset==0) {
+        }, swipeEnabled = state.firstVisibleItemScrollOffset == 0) {
             LazyColumn(Modifier.height(300.dp)) {
                 item {
                     if (vm.userQuestions.isNotEmpty()) {
@@ -353,7 +355,7 @@ fun QuestionPage(state: LazyListState,vm: MTPCStudyQuestionVM = viewModel()) {
 @ExperimentalPagerApi
 fun QuestionItemPage(courseId: Int, vm: MTPCStudyQuestionItemVM = viewModel()) {
     vm.getUserBuyCourseTopics(courseId)
-    Column() {
+    Column {
         vm.studyQuestionTypes.forEachIndexed { index, it ->
             Column() {
                 Row(Modifier.padding(start = 15.dp, top = 20.dp, bottom = 20.dp, end = 23.dp)) {
@@ -369,6 +371,28 @@ fun QuestionItemPage(courseId: Int, vm: MTPCStudyQuestionItemVM = viewModel()) {
                         vm.studyQuestionTypes = listOf()
                         vm.studyQuestionTypes = data
                     })
+                }
+                it.topicBeans.forEach { topicBean ->
+                    AnimatedVisibility(visible = !it.fold) {
+                        Column(Modifier.background(color_F7F7F7).fillMaxWidth().padding(start = 12.dp, end = 26.dp, top = 12.dp, bottom = 12.dp)) {
+                            Row() {
+                                EllipsisText(topicBean.examinationName ?: "", 12.sp, color_2, Modifier.weight(1F))
+                                Spacer(Modifier.width(80.dp))
+                                if (topicBean.testRecordBean != null) {
+                                    val studyTime = DateUtils.getTestTime(topicBean.testRecordBean!!.updateTime ?: "")
+                                    Text("${studyTime}练过", modifier = Modifier.align(Alignment.Bottom), fontSize = 11.sp, color = color_b)
+
+                                }
+                            }
+                            Spacer(Modifier.height(3.dp))
+                            Row() {
+                                val num = if (topicBean.testRecordBean == null) "0/" + topicBean.questionCount else topicBean.testRecordBean!!.testedCount.toString() + "/" + topicBean.questionCount
+                                Text(num, Modifier.weight(1F), color_b, 12.sp)
+                                val endTime = if (topicBean.endTime.isNullOrEmpty()) "长期有效" else "有效期：${DateUtils.utcToTime(topicBean.endTime ?: "", "yyyy/MM/dd")}"
+                                Text(endTime, fontSize = 11.sp, color = color_b)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -437,3 +461,6 @@ fun Modifier.myTabIndicatorOffset(currentTabPosition: TabPosition): Modifier = c
     val indicatorOffset by animateDpAsState(targetValue = currentTabPosition.left + (currentTabPosition.width - 20.dp) / 2, animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing))
     fillMaxWidth().wrapContentSize(Alignment.BottomStart).offset(x = indicatorOffset).width(currentTabWidth)
 }
+
+@Composable
+fun EllipsisText(content: String, fontSize: TextUnit = TextUnit.Unspecified, color: Color = Color.Unspecified, modifier: Modifier = Modifier) = Text(text = content, maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = fontSize, color = color, modifier = modifier)
