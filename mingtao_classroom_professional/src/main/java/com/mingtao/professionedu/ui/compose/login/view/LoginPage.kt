@@ -146,3 +146,4 @@ fun Modifier.noClickable(onClick: () -> Unit): Modifier = composed {
         MutableInteractionSource()
     })
 }
+

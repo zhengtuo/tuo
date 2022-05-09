@@ -4,8 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.mingtao.professionedu.R
-import com.mingtao.professionedu.data.model.*
+import com.mingtao.professionedu.data.model.StudyInfoBean
+import com.mingtao.professionedu.data.model.UserCourseBean
+import com.mingtao.professionedu.data.model.VideoInfoBean
 import com.mingtao.professionedu.ui.compose.main.model.MTPCStudyModel
 import com.mingtao.professionedu.utils.MTPUtils
 import com.zheng.base.data.model.Resource

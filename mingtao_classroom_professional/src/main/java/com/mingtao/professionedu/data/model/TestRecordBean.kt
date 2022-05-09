@@ -1,0 +1,10 @@
+package com.mingtao.professionedu.data.model
+
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+class TestRecordBean {
+    var testedCount = 0
+
+    var updateTime: String? = ""
+}

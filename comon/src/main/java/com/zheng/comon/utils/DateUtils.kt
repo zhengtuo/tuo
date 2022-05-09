@@ -88,4 +88,26 @@ object DateUtils {
             minute.toString() + "分" + second + "秒"
         }
     }
+
+    //练习时间   返回几天前或1月1日/19年12月31日
+    fun getTestTime(utcTime: String): String? {
+        val date: Date = utcToDate(utcTime)
+        val calendar1 = Calendar.getInstance()
+        val calendar2 = Calendar.getInstance()
+        calendar1.time = date
+        calendar2.time = Date()
+        return if (calendar1[Calendar.YEAR] == calendar2[Calendar.YEAR]) {
+            if (calendar1[Calendar.DAY_OF_YEAR] == calendar2[Calendar.DAY_OF_YEAR]) {
+                utcToHM(utcTime)
+            } else if ((calendar2.timeInMillis - calendar1.timeInMillis) / 1000 / 24 / 60 / 60 < 7) {
+                if ((calendar2.timeInMillis - calendar1.timeInMillis) / 1000 / 24 / 60 / 60 <= 0) 1.toString() + "天前" else ((calendar2.timeInMillis - calendar1.timeInMillis) / 1000 / 24 / 60 / 60).toString() + "天前"
+            } else {
+                val localFormat = SimpleDateFormat("MM月dd日", Locale.CHINA)
+                localFormat.format(date.time)
+            }
+        } else {
+            val localFormat = SimpleDateFormat("yy年MM月dd日", Locale.CHINA)
+            localFormat.format(date.time)
+        }
+    }
 }
