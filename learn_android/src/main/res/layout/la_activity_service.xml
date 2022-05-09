@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <import type="com.zheng.comon.utils.CommonUtils" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.interview.ServiceActivity">
+
+        <Button
+            android:id="@+id/bt_startLearnService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="startLearnService"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="startLearnService"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_closeLearnService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="closeLearnService"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="closeLearnService"
+            app:layout_constraintTop_toBottomOf="@+id/bt_startLearnService" />
+
+        <Button
+            android:id="@+id/bt_bindLearnService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bind_service"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="bindLearnService"
+            app:layout_constraintTop_toBottomOf="@+id/bt_closeLearnService" />
+
+        <Button
+            android:id="@+id/bt_unBindLearnService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unbind_service"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="unBindLearnService"
+            app:layout_constraintTop_toBottomOf="@+id/bt_bindLearnService" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

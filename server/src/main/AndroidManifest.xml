@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zheng.learn_android">
+    package="com.zt.server">
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="app.LKApp"
-        android:theme="@style/Theme.Design.Light.NoActionBar">
+        android:theme="@style/Theme.Tuo">
         <activity
-            android:name=".ui.interview.ServiceActivity"
+            android:name=".ServerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name=".ui.interview.LearnService" />
-
     </application>
 
 </manifest>

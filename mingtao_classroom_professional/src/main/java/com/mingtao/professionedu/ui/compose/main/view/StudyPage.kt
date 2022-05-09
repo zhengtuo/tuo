@@ -53,6 +53,7 @@ import com.mingtao.professionedu.ui.compose.theme.*
 import com.zheng.base.utils.launch
 import com.zheng.comon.utils.CommonUtils
 import com.zheng.comon.utils.DateUtils
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalPagerApi
 @Composable
@@ -315,6 +316,7 @@ fun CoursePage(vm: MTPCStudyVM) {
     }
 }
 
+@ExperimentalCoroutinesApi
 @Composable
 @ExperimentalPagerApi
 fun QuestionPage(state: LazyListState,vm: MTPCStudyQuestionVM = viewModel()) {

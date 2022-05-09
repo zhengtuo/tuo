@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/lib" />
             <option value="$PROJECT_DIR$/mingtao_classroom_professional" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/server" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

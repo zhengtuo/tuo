@@ -65,6 +65,7 @@ class MTPCStudyQuestionVM @Inject constructor(private val mModel: MTPCStudyModel
                             }
                         }
                     }
+                    delay(500)
                     refreshing = false
                 }
             }

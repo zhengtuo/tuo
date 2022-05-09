@@ -7,15 +7,11 @@ import com.zheng.base.delegate.ApplicationDelegate
 import com.zheng.comon.utils.CommonUtils
 import com.zheng.learn_android.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 @HiltAndroidApp
 open class LKApp : Application() {
 
-    /**
-     * Application 代理 规避项目中集成了其它第三方类或其它原因，不能集成本类BaseApplication时，
-     * 参照本类实现 ApplicationDelegate 即可初始化MVVMFrame框架配置信息。
-     */
-    lateinit var mApplicationDelegate: ApplicationDelegate
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -23,7 +19,6 @@ open class LKApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        mApplicationDelegate.onCreate()
         initApp()
     }
 
@@ -33,7 +28,7 @@ open class LKApp : Application() {
     private fun initApp() {
         CommonUtils.context = this
         //LibUtils.setNetConstants(NetConfig().setBaseUrl("http://php.mingtaoedu.com/mt/public/index.php/").setInterceptor(HeadInterceptor()))
-
+        Timber.plant(Timber.DebugTree())
         initARouter()
     }
 
