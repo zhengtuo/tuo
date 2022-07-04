@@ -39,10 +39,16 @@ class DreloveyService:Service() {
     }
 
     private var myBinder = object:Drelovey.Stub(){
-        override fun showContent(content: String?) {
+        override fun showContent(content: String) {
             println("DreloveyService borrow content = $content")
             handler.post{
                 Toast.makeText(this@DreloveyService,"showContent $content",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        override fun sendData(bean: ServerBean) {
+            handler.post{
+                Toast.makeText(this@DreloveyService,"sendData ${bean.name}",Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -1,4 +1,4 @@
-package com.zheng.learn_android.ui.interview
+package com.zheng.learn_android.ui.interview.assembly
 
 import android.content.ComponentName
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.os.IBinder
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.zheng.learn_android.R
+import com.zheng.learn_android.ui.interview.LearnBinder
+import com.zheng.learn_android.ui.interview.LearnService
 
 class ServiceActivity : AppCompatActivity() {
 

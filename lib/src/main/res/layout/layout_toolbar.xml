@@ -8,7 +8,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.zheng.comon.binding.listener.CommonBinding" />
+        <import type="com.zheng.lib.binding.listener.CommonBinding" />
 
         <variable
             name="utils"
@@ -60,7 +60,7 @@
 
         <variable
             name="leftCommand"
-            type="com.zheng.comon.binding.listener.BindingClickT" />
+            type="com.zheng.lib.binding.listener.BindingClickT" />
 
     </data>
 

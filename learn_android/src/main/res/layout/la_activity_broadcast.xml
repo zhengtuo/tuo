@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="staticRegisterBroadcast"
+        android:text="静态注册广播,android8.0后失败"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="dynamicRegisterBroadcast"
+        android:text="动态开启网络监听广播"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/three"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/one"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendCustomizeBroadcast"
+        android:text="发送自定义广播"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/four"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/one"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendOrderlyBroadcast"
+        android:text="有序广播,优先级越高,越早收到消息"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/five"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/three"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendLocalBroadcast"
+        android:text="发送本地广播"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/six"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/four"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sendStickyBroadcast"
+        android:text="发送粘性广播"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@id/seven"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/four"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+    <Button
+        android:id="@+id/seven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="registerStickyBroadcast"
+        android:text="注册粘性广播"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/four"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

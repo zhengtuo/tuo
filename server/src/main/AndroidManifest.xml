@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zt.server">
+    <!-- 自定义权限-->
+    <permission android:name="com.aidl.use" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".DreloveyService"
+            android:exported="true"
+            android:permission="com.aidl.use">
+            <intent-filter>
+                <action android:name="com.zt.server.DreloveyService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
